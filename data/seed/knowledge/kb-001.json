@@ -1,0 +1,13 @@
+{
+  "id": "kb-001",
+  "title": "Resetting a password",
+  "content": "Open the sign-in page, choose the password reset link, enter the account email, and follow the reset message sent to the inbox. If the message does not arrive, check spam and verify the email address.",
+  "intent": "account_management",
+  "tags": [
+    "password",
+    "reset",
+    "login"
+  ],
+  "quality": 1.0,
+  "usage": 0
+}

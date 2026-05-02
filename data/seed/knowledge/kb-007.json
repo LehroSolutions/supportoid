@@ -1,0 +1,13 @@
+{
+  "id": "kb-007",
+  "title": "Webhook configuration",
+  "content": "Webhook setup usually requires an endpoint URL, event selection, and signature verification. Support responses should mention retry behavior and validation steps without exposing secrets or private endpoints.",
+  "intent": "technical_issue",
+  "tags": [
+    "webhook",
+    "integration",
+    "signature"
+  ],
+  "quality": 1.0,
+  "usage": 0
+}

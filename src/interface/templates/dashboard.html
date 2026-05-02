@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2 style="margin-top: 0;">Platform Dashboard</h2>
+  <p class="muted">Canonical core status for API, CLI, and web runtime.</p>
+  <div class="flex">
+    <div class="card" style="flex: 1; min-width: 220px;">
+      <h3>Total Processed</h3>
+      <p>{{ stats.total_processed }}</p>
+    </div>
+    <div class="card" style="flex: 1; min-width: 220px;">
+      <h3>Escalations</h3>
+      <p>{{ stats.escalations }}</p>
+    </div>
+    <div class="card" style="flex: 1; min-width: 220px;">
+      <h3>Active Sessions</h3>
+      <p>{{ stats.active_sessions }}</p>
+    </div>
+    <div class="card" style="flex: 1; min-width: 220px;">
+      <h3>Trace Records</h3>
+      <p>{{ stats.traces }}</p>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <h3 style="margin-top: 0;">Model Health</h3>
+  <table>
+    <tr><th>Version</th><td>{{ stats.version }}</td></tr>
+    <tr><th>Classifier Version</th><td>{{ stats.model_version }}</td></tr>
+    <tr><th>Model Accuracy</th><td>{{ "%.3f"|format(stats.model_accuracy) }}</td></tr>
+    <tr><th>Average Confidence</th><td>{{ "%.3f"|format(stats.avg_confidence) }}</td></tr>
+    <tr><th>Average Quality</th><td>{{ "%.3f"|format(stats.avg_quality) }}</td></tr>
+    <tr><th>Knowledge Entries</th><td>{{ stats.knowledge_entries }}</td></tr>
+  </table>
+</div>
+{% endblock %}
+

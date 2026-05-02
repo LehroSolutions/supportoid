@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2 style="margin-top: 0;">KB Quality</h2>
+  <p class="muted">Quality report for knowledge entries across completeness, clarity, freshness, usage, and coverage.</p>
+  <table>
+    <tr><th>Total Entries</th><td>{{ report.total_entries }}</td></tr>
+    <tr><th>Overall Average</th><td>{{ "%.3f"|format(report.overall_avg) }}</td></tr>
+    <tr><th>Report Generated</th><td>{{ report.report_generated or "-" }}</td></tr>
+  </table>
+</div>
+<div class="card">
+  <h3 style="margin-top: 0;">Grade Distribution</h3>
+  <table>
+    <thead><tr><th>Grade</th><th>Count</th></tr></thead>
+    <tbody>
+      {% for grade, count in report.grade_distribution.items() %}
+      <tr><td>{{ grade }}</td><td>{{ count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="card">
+  <h3 style="margin-top: 0;">Dimension Averages</h3>
+  <table>
+    <thead><tr><th>Dimension</th><th>Score</th></tr></thead>
+    <tbody>
+      {% for dim, score in report.dimension_averages.items() %}
+      <tr><td>{{ dim }}</td><td>{{ "%.3f"|format(score) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

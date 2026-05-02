@@ -1,0 +1,13 @@
+{
+  "id": "kb-005",
+  "title": "Troubleshooting a server error",
+  "content": "If the product returns a server-side error, ask for the action the user attempted, any visible error text, and the time it occurred. Recommend checking the service status page and retrying only after confirming the issue is not ongoing.",
+  "intent": "technical_issue",
+  "tags": [
+    "error",
+    "server",
+    "troubleshooting"
+  ],
+  "quality": 1.0,
+  "usage": 0
+}

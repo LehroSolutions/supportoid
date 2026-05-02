@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2 style="margin-top: 0;">Trace Explorer</h2>
+  <p class="muted">Recent session traces summarized from canonical store.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Session</th>
+        <th>Duration</th>
+        <th>Steps</th>
+        <th>Escalated</th>
+        <th>Error</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in traces %}
+      <tr>
+        <td><code>{{ t.session_id }}</code></td>
+        <td>{{ "%.3f"|format(t.duration_s) }}s</td>
+        <td>{{ t.steps }}</td>
+        <td>{% if t.escalated %}<span class="danger">Yes</span>{% else %}<span class="ok">No</span>{% endif %}</td>
+        <td>{{ t.error or "-" }}</td>
+        <td>{{ t.summary }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

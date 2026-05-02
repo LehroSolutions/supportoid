@@ -1,0 +1,159 @@
+[
+  {
+    "id": "password_reset",
+    "message": "I cannot log in and need to reset my password.",
+    "classification": {
+      "intent": "account_management",
+      "confidence": 0.86,
+      "sentiment": -0.2,
+      "urgency": 0.3,
+      "entities": {}
+    },
+    "kb_results": [
+      {
+        "id": "kb-001",
+        "title": "Password Reset",
+        "content": "Go to the sign-in page, choose Forgot Password, and use the reset link sent to your email.",
+        "_score": 12.0
+      }
+    ],
+    "expect_source_prefix": "fallback:grounded-kb",
+    "expect_needs_clarification": false,
+    "expect_should_escalate": false,
+    "must_include": ["Forgot Password"],
+    "must_not_include": ["already reset", "ticket has been created"]
+  },
+  {
+    "id": "billing_confusion",
+    "message": "My invoice amount looks wrong this month.",
+    "classification": {
+      "intent": "billing_inquiry",
+      "confidence": 0.8,
+      "sentiment": -0.1,
+      "urgency": 0.2,
+      "entities": {}
+    },
+    "kb_results": [
+      {
+        "id": "kb-002",
+        "title": "Billing Review",
+        "content": "Open Settings and Billing to review the plan, invoice date, and charge amount before requesting help.",
+        "_score": 8.0
+      }
+    ],
+    "expect_source_prefix": "fallback:grounded-kb",
+    "expect_needs_clarification": false,
+    "expect_should_escalate": false,
+    "must_include": ["Billing"],
+    "must_not_include": ["refund has been issued"]
+  },
+  {
+    "id": "refund_request",
+    "message": "I want a refund for yesterday's charge.",
+    "classification": {
+      "intent": "refund_request",
+      "confidence": 0.78,
+      "sentiment": -0.35,
+      "urgency": 0.4,
+      "entities": {"amount": "49"}
+    },
+    "kb_results": [],
+    "expect_source_prefix": "fallback:heuristic-safe",
+    "expect_needs_clarification": true,
+    "expect_should_escalate": false,
+    "must_include": ["cannot confirm a refund"],
+    "must_not_include": ["already issued", "processed your refund"]
+  },
+  {
+    "id": "webhook_setup_issue",
+    "message": "My webhook setup keeps failing and I do not know why.",
+    "classification": {
+      "intent": "technical_issue",
+      "confidence": 0.73,
+      "sentiment": -0.25,
+      "urgency": 0.45,
+      "entities": {}
+    },
+    "kb_results": [],
+    "expect_source_prefix": "fallback:heuristic-safe",
+    "expect_needs_clarification": true,
+    "expect_should_escalate": false,
+    "must_include": ["error text"],
+    "must_not_include": ["I fixed it for you"]
+  },
+  {
+    "id": "account_compromise",
+    "message": "I think someone else got into my account and changed things.",
+    "classification": {
+      "intent": "complaint",
+      "confidence": 0.69,
+      "sentiment": -0.75,
+      "urgency": 0.8,
+      "entities": {}
+    },
+    "kb_results": [],
+    "expect_source_prefix": "fallback:heuristic-safe",
+    "expect_needs_clarification": true,
+    "expect_should_escalate": true,
+    "must_include": ["specialist"],
+    "must_not_include": ["manager is already handling it"]
+  },
+  {
+    "id": "angry_customer",
+    "message": "This is unacceptable and I want to speak to a manager.",
+    "classification": {
+      "intent": "complaint",
+      "confidence": 0.77,
+      "sentiment": -0.9,
+      "urgency": 0.7,
+      "entities": {}
+    },
+    "kb_results": [],
+    "expect_source_prefix": "fallback:heuristic-safe",
+    "expect_needs_clarification": true,
+    "expect_should_escalate": true,
+    "must_include": ["reviewed by a specialist"],
+    "must_not_include": ["manager is already on the line"]
+  },
+  {
+    "id": "multilingual_request",
+    "message": "Necesito ayuda con mi factura porque no entiendo el cargo.",
+    "classification": {
+      "intent": "billing_inquiry",
+      "confidence": 0.61,
+      "sentiment": -0.1,
+      "urgency": 0.2,
+      "entities": {}
+    },
+    "kb_results": [],
+    "expect_source_prefix": "fallback:heuristic-safe",
+    "expect_needs_clarification": true,
+    "expect_should_escalate": false,
+    "must_include": ["I want to make sure I answer this accurately"],
+    "must_not_include": ["charge has been reversed"]
+  },
+  {
+    "id": "weak_grounding_requires_clarification",
+    "message": "Can you help with my plan options?",
+    "classification": {
+      "intent": "product_inquiry",
+      "confidence": 0.66,
+      "sentiment": 0.0,
+      "urgency": 0.1,
+      "entities": {}
+    },
+    "kb_results": [
+      {
+        "id": "kb-099",
+        "title": "Plan Notes",
+        "content": "Some plans include extra features.",
+        "_score": 0.3
+      }
+    ],
+    "expect_source_prefix": "fallback:clarify-weak-grounding",
+    "expect_needs_clarification": true,
+    "expect_should_escalate": false,
+    "must_include": ["not strong enough"],
+    "must_not_include": ["I already changed your plan"]
+  }
+]

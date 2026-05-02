@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+
+# Local secrets / provider project metadata
+.env
+.env.*
+!.env.example
+!.env.*.example
+convex.json
+.convex/
+convex/_generated/
+frontend/.env
+frontend/.env.*
+convex-adapter/.env
+convex-adapter/.env.*
+
+.npm-cache/
+.pytest_cache/
+.pytest-tmp/
+.pytest-tmp-run/
+.pytest-fixtures/
+.pytest-fixtures-probe*/
+pytest_tmp/
+pytest-cache-files-*/
+_write_probe/
+_probe_cli*/
+
+# Node / frontend artifacts
+frontend/node_modules/
+frontend/dist/
+convex-adapter/node_modules/
+convex-adapter/dist/
+
+# Runtime data
+data/*
+!data/README.md
+!data/seed/
+!data/seed/**
+src/traces/*.json
+*.db
+*.sqlite
+*.sqlite3
+
+# Local test scratch
+data/.pytest-*/
+data/pytest-cache-files-*/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+*.log

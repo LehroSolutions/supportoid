@@ -1,0 +1,13 @@
+{
+  "id": "kb-006",
+  "title": "SSO onboarding",
+  "content": "Single sign-on setup typically requires an administrator, an identity provider configuration, and metadata exchange. Collect the provider name and confirm whether the account tier includes SSO before suggesting next steps.",
+  "intent": "onboarding_help",
+  "tags": [
+    "sso",
+    "saml",
+    "identity"
+  ],
+  "quality": 1.0,
+  "usage": 0
+}

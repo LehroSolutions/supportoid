@@ -1,0 +1,13 @@
+{
+  "id": "kb-002",
+  "title": "Billing and invoices",
+  "content": "Billing starts on the subscription start date and renews on the same cycle. Customers can review plan details, invoices, and payment methods from the billing section of the product settings.",
+  "intent": "billing_inquiry",
+  "tags": [
+    "billing",
+    "invoice",
+    "payment"
+  ],
+  "quality": 1.0,
+  "usage": 0
+}

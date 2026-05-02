@@ -1,0 +1,39 @@
+services:
+  supportoid-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: supportoid-app
+    environment:
+      SUPPORTOID_HOST: 0.0.0.0
+      SUPPORTOID_PORT: 8001
+      SUPPORTOID_SQLITE_PATH: /app/data/runtime/app/supportoid.db
+      SUPPORTOID_KB_DIR: /app/data/runtime/knowledge
+      SUPPORTOID_FEEDBACK_DIR: /app/data/runtime/feedback
+      SUPPORTOID_TRAINING_DIR: /app/data/runtime/training
+      SUPPORTOID_COST_DIR: /app/data/runtime/costs
+      SUPPORTOID_TRACE_DIR: /app/data/runtime/traces
+      SUPPORTOID_CONVEX_ADAPTER_URL: http://convex-adapter:4010
+      SUPPORTOID_CONVEX_API_KEY: ${SUPPORTOID_CONVEX_API_KEY:-}
+      SUPPORTOID_ALLOW_LEGACY_ANON: "false"
+      SUPPORTOID_DEPLOYMENT_PROFILE: docker
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - convex-adapter
+
+  convex-adapter:
+    build:
+      context: ./convex-adapter
+      dockerfile: Dockerfile
+    container_name: supportoid-convex-adapter
+    environment:
+      ADAPTER_PORT: 4010
+      ADAPTER_API_KEY: ${SUPPORTOID_CONVEX_API_KEY:-}
+      ADAPTER_DATA_FILE: /app/data/adapter-data.json
+    ports:
+      - "4010:4010"
+    volumes:
+      - ./data/adapter:/app/data

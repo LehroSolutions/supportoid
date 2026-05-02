@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or "SupportOID" }}</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --text: #132033;
+      --muted: #5d6b84;
+      --accent: #0f6fff;
+      --danger: #c62828;
+      --ok: #177245;
+      --border: #d8deeb;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .nav {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .nav a, .nav button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 0.45rem 0.7rem;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .nav a.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .muted { color: var(--muted); }
+    .ok { color: var(--ok); }
+    .danger { color: var(--danger); }
+    .flex {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    form.inline { display: inline; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 0.65rem;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+    button.primary {
+      border: 0;
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    {% if user %}
+    <div class="card">
+      <div class="flex" style="justify-content: space-between; align-items: center;">
+        <div>
+          <strong>SupportOID</strong>
+          <span class="muted">Signed in as {{ user.username }}</span>
+          <span class="pill">{{ user.role }}</span>
+        </div>
+        <form class="inline" method="post" action="/logout"><button type="submit">Logout</button></form>
+      </div>
+      <div class="nav" style="margin-top: 0.8rem;">
+        <a href="/dashboard" class="{% if request.url.path == '/dashboard' %}active{% endif %}">Dashboard</a>
+        <a href="/chat" class="{% if request.url.path == '/chat' %}active{% endif %}">Chat Console</a>
+        <a href="/traces" class="{% if request.url.path == '/traces' %}active{% endif %}">Trace Explorer</a>
+        <a href="/kb-quality" class="{% if request.url.path == '/kb-quality' %}active{% endif %}">KB Quality</a>
+        <a href="/analytics" class="{% if request.url.path == '/analytics' %}active{% endif %}">Model & Cost Analytics</a>
+      </div>
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
+

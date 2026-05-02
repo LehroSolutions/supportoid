@@ -1,0 +1,13 @@
+{
+  "id": "kb-003",
+  "title": "Refund review flow",
+  "content": "Refund requests should include the subscription or order reference, charge date, amount, and reason for the request. The support assistant can collect this information but should not claim the refund has already been approved.",
+  "intent": "refund_request",
+  "tags": [
+    "refund",
+    "charge",
+    "billing"
+  ],
+  "quality": 1.0,
+  "usage": 0
+}

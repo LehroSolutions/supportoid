@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2 style="margin-top: 0;">Model and Cost Analytics</h2>
+  <p class="muted">Cross-model usage and total operating cost signals.</p>
+  <table>
+    <tr><th>Total Conversations</th><td>{{ costs.total_conversations }}</td></tr>
+    <tr><th>Total Cost (USD)</th><td>${{ "%.6f"|format(costs.total_cost_usd) }}</td></tr>
+    <tr><th>Total Calls</th><td>{{ costs.total_calls }}</td></tr>
+    <tr><th>Input Tokens</th><td>{{ costs.total_input_tokens }}</td></tr>
+    <tr><th>Output Tokens</th><td>{{ costs.total_output_tokens }}</td></tr>
+  </table>
+</div>
+<div class="card">
+  <h3 style="margin-top: 0;">Calls by Model</h3>
+  <table>
+    <thead><tr><th>Model</th><th>Calls</th></tr></thead>
+    <tbody>
+      {% for model, count in costs.calls_by_model.items() %}
+      <tr><td>{{ model }}</td><td>{{ count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="card">
+  <h3 style="margin-top: 0;">Cost by Model</h3>
+  <table>
+    <thead><tr><th>Model</th><th>Cost (USD)</th></tr></thead>
+    <tbody>
+      {% for model, value in costs.cost_by_model.items() %}
+      <tr><td>{{ model }}</td><td>${{ "%.6f"|format(value) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="card">
+  <h3 style="margin-top: 0;">Runtime Stats</h3>
+  <table>
+    <tr><th>Version</th><td>{{ stats.version }}</td></tr>
+    <tr><th>Total Processed</th><td>{{ stats.total_processed }}</td></tr>
+    <tr><th>Escalations</th><td>{{ stats.escalations }}</td></tr>
+    <tr><th>Cache Hit Rate</th><td>{{ "%.2f"|format(stats.cache_hit_rate) }}%</td></tr>
+  </table>
+</div>
+{% endblock %}
+

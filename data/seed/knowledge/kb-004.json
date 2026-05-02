@@ -1,0 +1,13 @@
+{
+  "id": "kb-004",
+  "title": "Plan comparison",
+  "content": "The product offers entry-level, growth, and enterprise tiers with progressively higher limits, governance features, and support options. Support responses should summarize differences without inventing unavailable plan features.",
+  "intent": "product_inquiry",
+  "tags": [
+    "plans",
+    "pricing",
+    "upgrade"
+  ],
+  "quality": 1.0,
+  "usage": 0
+}
