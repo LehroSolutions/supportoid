@@ -271,8 +271,13 @@ class EnhancedOrchestrator:
 
         with self._global_lock:
             for cid, session in self.original.sessions.items():
-                created = session.get("_created_mono", 0)
-                if created > 0 and created < cutoff:
+                if "_created_mono" not in session:
+                    continue
+                try:
+                    created = float(session["_created_mono"])
+                except (TypeError, ValueError):
+                    continue
+                if created < cutoff:
                     to_remove.append(cid)
             for cid in to_remove:
                 del self.original.sessions[cid]
