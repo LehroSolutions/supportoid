@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "operations",
+  "title": "Operations",
+  "status": "current",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/operations.md",
+  "counterparts": {
+    "markdown": "current/operations.md",
+    "html": "current/operations.html",
+    "json": "current/operations.json"
+  },
+  "summary": "Current operations guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "runtime-signals",
+      "label": "Runtime signals"
+    },
+    {
+      "id": "release-routine",
+      "label": "Release routine"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "operations",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "168d62815c49f6f1584015ad6adeff9a98f9764e477456af8c75fab6743f9b87",
+  "generatedAt": "2026-07-13T11:47:55.602626+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "1.0",
+  "product": "SupportOID",
+  "documentationHome": "index.html",
+  "canonicalRoot": "current",
+  "guides": [
+    {
+      "slug": "start-here",
+      "title": "Start Here",
+      "section": "Current guides",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.",
+      "paths": {
+        "markdown": "current/start-here.md",
+        "html": "current/start-here.html",
+        "json": "current/start-here.json"
+      }
+    },
+    {
+      "slug": "foundations",
+      "title": "Foundations",
+      "section": "Current guides",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "Current foundations guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/foundations.md",
+        "html": "current/foundations.html",
+        "json": "current/foundations.json"
+      }
+    },
+    {
+      "slug": "design-system",
+      "title": "Design System",
+      "section": "Current guides",
+      "audience": [
+        "Designers",
+        "Developers"
+      ],
+      "status": "current",
+      "description": "Current design system guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/design-system.md",
+        "html": "current/design-system.html",
+        "json": "current/design-system.json"
+      }
+    },
+    {
+      "slug": "patterns",
+      "title": "Patterns",
+      "section": "Current guides",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "Current patterns guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/patterns.md",
+        "html": "current/patterns.html",
+        "json": "current/patterns.json"
+      }
+    },
+    {
+      "slug": "architecture",
+      "title": "Architecture",
+      "section": "Current guides",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "Current architecture guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/architecture.md",
+        "html": "current/architecture.html",
+        "json": "current/architecture.json"
+      }
+    },
+    {
+      "slug": "operations",
+      "title": "Operations",
+      "section": "Current guides",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "Current operations guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/operations.md",
+        "html": "current/operations.html",
+        "json": "current/operations.json"
+      }
+    },
+    {
+      "slug": "security",
+      "title": "Security",
+      "section": "Current guides",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "Current security guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/security.md",
+        "html": "current/security.html",
+        "json": "current/security.json"
+      }
+    },
+    {
+      "slug": "quality",
+      "title": "Quality",
+      "section": "Current guides",
+      "audience": [
+        "Contributors",
+        "Maintainers"
+      ],
+      "status": "current",
+      "description": "Current quality guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/quality.md",
+        "html": "current/quality.html",
+        "json": "current/quality.json"
+      }
+    },
+    {
+      "slug": "contributing",
+      "title": "Contributing",
+      "section": "Current guides",
+      "audience": [
+        "Contributors",
+        "Maintainers"
+      ],
+      "status": "current",
+      "description": "Current contributing guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/contributing.md",
+        "html": "current/contributing.html",
+        "json": "current/contributing.json"
+      }
+    },
+    {
+      "slug": "roadmap",
+      "title": "Roadmap",
+      "section": "Current guides",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "Current roadmap guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/roadmap.md",
+        "html": "current/roadmap.html",
+        "json": "current/roadmap.json"
+      }
+    },
+    {
+      "slug": "adr-0004-documentation-contract",
+      "title": "ADR-0004: Documentation counterpart contract",
+      "section": "ADRs",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "accepted",
+      "description": "Current adr 0004 documentation contract guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/adr-0004-documentation-contract.md",
+        "html": "current/adr-0004-documentation-contract.html",
+        "json": "current/adr-0004-documentation-contract.json"
+      }
+    },
+    {
+      "slug": "evidence-log",
+      "title": "Evidence Log",
+      "section": "Evidence logs",
+      "audience": [
+        "Support operators",
+        "Administrators",
+        "Backend and frontend contributors"
+      ],
+      "status": "current",
+      "description": "Current evidence log guidance for SupportOID.",
+      "paths": {
+        "markdown": "current/evidence-log.md",
+        "html": "current/evidence-log.html",
+        "json": "current/evidence-log.json"
+      }
+    }
+  ]
+}

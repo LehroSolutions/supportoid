@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Security",
+  "group": "Guides",
+  "path": ".docs/security.md",
+  "lead": "Security issues noticed during failed builds or breaking errors should be recorded under this docs system as dated markdown notes and linked from this page.",
+  "content_markdown": "# SupportOID Security\n\n## Current controls\n- bcrypt password hashing outside test mode\n- Constant-time CSRF comparison\n- RBAC + rate limiting + redaction helpers\n\n## Logging convention\nSecurity issues noticed during failed builds or breaking errors should be recorded under this docs system as dated markdown notes and linked from this page.\n\n## Related logs\n- Prefer `SECURITY_ISSUES_YYYY-MM-DD.md` siblings in this folder when incidents occur\n- Keep secrets out of documentation samples\n\n## Related\n- [Architecture](./architecture.md)\n- [License](./license.md)\n- [ADR-0002](./adr-0002-apache-2-0.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

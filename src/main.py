@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import hmac
 import secrets
 import time
 import uuid
@@ -96,7 +97,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 )
                 if has_origin and csrf_cookie:
                     header_token = request.headers.get("X-CSRF-Token")
-                    if not header_token or header_token != csrf_cookie:
+                    if not header_token or not hmac.compare_digest(header_token, csrf_cookie):
                         return JSONResponse(
                             status_code=403,
                             content={

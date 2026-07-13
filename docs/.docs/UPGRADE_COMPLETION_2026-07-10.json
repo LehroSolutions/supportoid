@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Upgrade Completion 2026 07 10",
+  "group": "Project",
+  "path": ".docs/UPGRADE_COMPLETION_2026-07-10.md",
+  "lead": "Run backend pytest + frontend build after restoring dependencies.",
+  "content_markdown": "# 2026 Upgrade Completion\n\n## Outcome\n\n- Constant-time CSRF comparison.\n- Frontend motion props restored to valid Framer Motion object literals.\n- Product-sans typography on operational surfaces.\n\n## Verification gates\n\nRun backend pytest + frontend build after restoring dependencies.\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

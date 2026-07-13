@@ -1,0 +1,20 @@
+{
+  "release": "archive-2026-07-13",
+  "sourceRevision": "supplied all-upgraded-codebases-final archive",
+  "generatedAt": "2026-07-13T11:47:55.604971+00:00",
+  "docsBuild": "node scripts/docs.mjs build",
+  "counts": {
+    "markdown": 12,
+    "html": 13,
+    "json": 15,
+    "diagrams": 1,
+    "adrs": 1,
+    "skills": 0
+  },
+  "checks": {
+    "counterpartsFresh": true,
+    "linksValid": true,
+    "jsonValid": true,
+    "portalIndexed": true
+  }
+}

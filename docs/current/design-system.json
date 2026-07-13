@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "design-system",
+  "title": "Design System",
+  "status": "current",
+  "audience": [
+    "Designers",
+    "Developers"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/design-system.md",
+  "counterparts": {
+    "markdown": "current/design-system.md",
+    "html": "current/design-system.html",
+    "json": "current/design-system.json"
+  },
+  "summary": "Current design system guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "visual-grammar",
+      "label": "Visual grammar"
+    },
+    {
+      "id": "interaction-states",
+      "label": "Interaction states"
+    },
+    {
+      "id": "component-contract",
+      "label": "Component contract"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "design-system",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "aafee9210b08ba768ef883d01ca41bfc5d868c388f782cce994ea58879441b73",
+  "generatedAt": "2026-07-13T11:47:55.601571+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

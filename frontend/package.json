@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "package:manager": "bun --version",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"*.{json,md,yml,yaml}\""
   },
   "dependencies": {
     "@tanstack/react-query": "^5.8.0",
@@ -28,6 +31,14 @@
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "prettier": "^3.5.3"
+  },
+  "license": "Apache-2.0",
+  "author": "Lehro Solutions",
+  "packageManager": "bun@1.3.14",
+  "engines": {
+    "node": ">=24",
+    "bun": ">=1.3.14"
   }
 }

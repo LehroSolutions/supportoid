@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SupportOID · Security</title><link rel="stylesheet" href="../assets/docs.css"></head><body><header class="top"><div class="top-inner brand"><div><a href="../index.html"><strong>SupportOID documentation</strong></a><p>A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.</p></div><span>Current · 2026-07-13</span></div></header><div class="shell"><nav class="nav" aria-label="Documentation guides"><a href="../index.html">Documentation Home</a><a href="start-here.html" >Start Here</a><a href="foundations.html" >Foundations</a><a href="design-system.html" >Design System</a><a href="patterns.html" >Patterns</a><a href="architecture.html" >Architecture</a><a href="operations.html" >Operations</a><a href="security.html" aria-current="page">Security</a><a href="quality.html" >Quality</a><a href="contributing.html" >Contributing</a><a href="roadmap.html" >Roadmap</a><a href="adr-0004-documentation-contract.html" >Adr 0004 Documentation Contract</a><a href="evidence-log.html" >Evidence Log</a></nav><main><article class="card"><div class="meta"><span>Status: current</span><span>Last reviewed: 2026-07-13</span><span>Audience: Support operators, Administrators, Backend and frontend contributors</span></div><nav aria-label="On this page"><strong>On this page</strong><ol><li><a href="#purpose">Purpose</a></li><li><a href="#on-this-page">On this page</a></li><li><a href="#guidance">Guidance</a></li><li><a href="#verification">Verification</a></li><li><a href="#related-guides">Related guides</a></li><li><a href="#current-safeguards">Current safeguards</a></li><li><a href="#contributor-rules">Contributor rules</a></li></ol></nav><h1 id="top">Security</h1>
+<p><strong>Counterparts:</strong> <a href="security.html"><code>security.html</code></a> · <a href="security.json">`security.json`</a></p>
+<ul><li>**Section:** Security</li></ul>
+<ul><li>**Audience:** Security reviewers, maintainers, and contributors</li></ul>
+<ul><li>**Use when:** Handling credentials, sensitive data, authenticated actions, or a security review.</li></ul>
+<ul><li>**Status:** Current</li></ul>
+<ul><li>**Last reviewed:** 2026-07-13</li></ul>
+<h2 id="purpose">Purpose</h2>
+<p>Capture the public security boundary for SupportOID and link secure changes to verifiable behavior.</p>
+<h2 id="on-this-page">On this page</h2>
+<ul><li>[Current safeguards](#current-safeguards)</li></ul>
+<ul><li>[Contributor rules](#contributor-rules)</li></ul>
+<ul><li>[Verification](#verification)</li></ul>
+<h2 id="current-safeguards">Current safeguards</h2>
+<ul><li>Keep credentials, runtime databases, feedback logs, and populated traces out of source releases.</li></ul>
+<ul><li>Use role-aware controls and CSRF-protected mutation routes for administrative actions.</li></ul>
+<h2 id="contributor-rules">Contributor rules</h2>
+<ul><li>Never commit real credentials, populated runtime data, access tokens, or private production logs.</li></ul>
+<ul><li>Validate untrusted input at the API or import boundary.</li></ul>
+<ul><li>Document security-relevant decisions in an ADR or evidence log when trade-offs are durable.</li></ul>
+<h2 id="verification">Verification</h2>
+<ul><li>Run targeted negative-path tests where the product provides them.</li></ul>
+<ul><li>Confirm public examples use synthetic data and safe defaults.</li></ul>
+<h2 id="related-guides">Related guides</h2>
+<ul><li>[Architecture](architecture.md)</li></ul>
+<ul><li>[Operations](operations.md)</li></ul>
+<ul><li>[Quality](quality.md)</li></ul></article></main></div><footer class="footer">Source: <a href="security.md">Markdown</a> · Machine metadata: <a href="security.json">JSON</a> · <a href="../docs-map.json">Documentation map</a></footer></body></html>

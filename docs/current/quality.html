@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SupportOID · Quality</title><link rel="stylesheet" href="../assets/docs.css"></head><body><header class="top"><div class="top-inner brand"><div><a href="../index.html"><strong>SupportOID documentation</strong></a><p>A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.</p></div><span>Current · 2026-07-13</span></div></header><div class="shell"><nav class="nav" aria-label="Documentation guides"><a href="../index.html">Documentation Home</a><a href="start-here.html" >Start Here</a><a href="foundations.html" >Foundations</a><a href="design-system.html" >Design System</a><a href="patterns.html" >Patterns</a><a href="architecture.html" >Architecture</a><a href="operations.html" >Operations</a><a href="security.html" >Security</a><a href="quality.html" aria-current="page">Quality</a><a href="contributing.html" >Contributing</a><a href="roadmap.html" >Roadmap</a><a href="adr-0004-documentation-contract.html" >Adr 0004 Documentation Contract</a><a href="evidence-log.html" >Evidence Log</a></nav><main><article class="card"><div class="meta"><span>Status: current</span><span>Last reviewed: 2026-07-13</span><span>Audience: Contributors, Maintainers</span></div><nav aria-label="On this page"><strong>On this page</strong><ol><li><a href="#purpose">Purpose</a></li><li><a href="#on-this-page">On this page</a></li><li><a href="#guidance">Guidance</a></li><li><a href="#verification">Verification</a></li><li><a href="#related-guides">Related guides</a></li><li><a href="#required-gates">Required gates</a></li><li><a href="#documentation-gate">Documentation gate</a></li><li><a href="#definition-of-done">Definition of done</a></li></ol></nav><h1 id="top">Quality and verification</h1>
+<p><strong>Counterparts:</strong> <a href="quality.html"><code>quality.html</code></a> · <a href="quality.json">`quality.json`</a></p>
+<ul><li>**Section:** Quality</li></ul>
+<ul><li>**Audience:** Contributors and release maintainers</li></ul>
+<ul><li>**Use when:** Changing product behavior, documentation, or preparing a release.</li></ul>
+<ul><li>**Status:** Current</li></ul>
+<ul><li>**Last reviewed:** 2026-07-13</li></ul>
+<h2 id="purpose">Purpose</h2>
+<p>Define the minimum evidence required before describing a change as ready.</p>
+<h2 id="on-this-page">On this page</h2>
+<ul><li>[Required gates](#required-gates)</li></ul>
+<ul><li>[Documentation gate](#documentation-gate)</li></ul>
+<ul><li>[Definition of done](#definition-of-done)</li></ul>
+<h2 id="required-gates">Required gates</h2>
+<p>1. Run the appropriate product command: <code>python -m compileall -q src</code>.</p>
+<p>2. Run focused tests for changed behavior.</p>
+<p>3. Inspect relevant empty, loading, error, disabled, desktop, and narrow-width UI states.</p>
+<p>4. Record evidence without turning historical output into current product guidance.</p>
+<h2 id="documentation-gate">Documentation gate</h2>
+<p><code>pnpm docs:build</code> regenerates reader, agent, portal, map, and release-manifest artifacts from canonical documentation. `pnpm docs:check` fails when counterpart, metadata, checksum, or navigation contracts are not satisfied.</p>
+<h2 id="definition-of-done">Definition of done</h2>
+<ul><li>The code, workflow, architecture, security, and quality docs agree.</li></ul>
+<ul><li>Every current canonical guide has Markdown, HTML, and JSON counterparts.</li></ul>
+<ul><li>Local links and counterpart metadata validate.</li></ul>
+<ul><li>The public README links to the current Documentation Home.</li></ul>
+<h2 id="related-guides">Related guides</h2>
+<ul><li>[Contributing](contributing.md)</li></ul>
+<ul><li>[Evidence log](evidence-log.md)</li></ul>
+<ul><li>[Roadmap](roadmap.md)</li></ul></article></main></div><footer class="footer">Source: <a href="quality.md">Markdown</a> · Machine metadata: <a href="quality.json">JSON</a> · <a href="../docs-map.json">Documentation map</a></footer></body></html>

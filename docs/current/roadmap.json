@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "roadmap",
+  "title": "Roadmap",
+  "status": "current",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/roadmap.md",
+  "counterparts": {
+    "markdown": "current/roadmap.md",
+    "html": "current/roadmap.html",
+    "json": "current/roadmap.json"
+  },
+  "summary": "Current roadmap guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "completed-delivery",
+      "label": "Completed delivery"
+    },
+    {
+      "id": "current-maintenance",
+      "label": "Current maintenance"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "roadmap",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "bd63a734941ac26e15014785063202add1bef02e4eb8e588cef9f3940579ef71",
+  "generatedAt": "2026-07-13T11:47:55.603651+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

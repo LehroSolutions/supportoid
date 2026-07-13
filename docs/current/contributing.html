@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SupportOID · Contributing</title><link rel="stylesheet" href="../assets/docs.css"></head><body><header class="top"><div class="top-inner brand"><div><a href="../index.html"><strong>SupportOID documentation</strong></a><p>A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.</p></div><span>Current · 2026-07-13</span></div></header><div class="shell"><nav class="nav" aria-label="Documentation guides"><a href="../index.html">Documentation Home</a><a href="start-here.html" >Start Here</a><a href="foundations.html" >Foundations</a><a href="design-system.html" >Design System</a><a href="patterns.html" >Patterns</a><a href="architecture.html" >Architecture</a><a href="operations.html" >Operations</a><a href="security.html" >Security</a><a href="quality.html" >Quality</a><a href="contributing.html" aria-current="page">Contributing</a><a href="roadmap.html" >Roadmap</a><a href="adr-0004-documentation-contract.html" >Adr 0004 Documentation Contract</a><a href="evidence-log.html" >Evidence Log</a></nav><main><article class="card"><div class="meta"><span>Status: current</span><span>Last reviewed: 2026-07-13</span><span>Audience: Contributors, Maintainers</span></div><nav aria-label="On this page"><strong>On this page</strong><ol><li><a href="#purpose">Purpose</a></li><li><a href="#on-this-page">On this page</a></li><li><a href="#guidance">Guidance</a></li><li><a href="#verification">Verification</a></li><li><a href="#related-guides">Related guides</a></li><li><a href="#change-workflow">Change workflow</a></li><li><a href="#documentation-workflow">Documentation workflow</a></li></ol></nav><h1 id="top">Contributing</h1>
+<p><strong>Counterparts:</strong> <a href="contributing.html"><code>contributing.html</code></a> · <a href="contributing.json">`contributing.json`</a></p>
+<ul><li>**Section:** Contributing</li></ul>
+<ul><li>**Audience:** Contributors and maintainers</li></ul>
+<ul><li>**Use when:** Preparing a pull request or changing product/documentation behavior.</li></ul>
+<ul><li>**Status:** Current</li></ul>
+<ul><li>**Last reviewed:** 2026-07-13</li></ul>
+<h2 id="purpose">Purpose</h2>
+<p>Provide a safe contribution path that keeps source, tests, and documentation aligned.</p>
+<h2 id="on-this-page">On this page</h2>
+<ul><li>[Change workflow](#change-workflow)</li></ul>
+<ul><li>[Documentation workflow](#documentation-workflow)</li></ul>
+<ul><li>[Verification](#verification)</li></ul>
+<h2 id="change-workflow">Change workflow</h2>
+<p>1. Read <a href="start-here.md">Start here</a>, then the workflow and architecture guide that owns your change.</p>
+<p>2. Keep scope small and preserve backward compatibility unless a documented decision changes it.</p>
+<p>3. Add or update focused tests and evidence.</p>
+<p>4. Update current guides before merging.</p>
+<h2 id="documentation-workflow">Documentation workflow</h2>
+<p>1. Edit canonical prose in <code>docs/current/*.md</code>.</p>
+<p>2. Run <code>pnpm docs:build</code>.</p>
+<p>3. Run <code>pnpm docs:check</code>.</p>
+<p>4. Review generated HTML and JSON changes together with the Markdown source.</p>
+<h2 id="verification">Verification</h2>
+<p>A contribution is ready only when product checks and the documentation gate both pass.</p>
+<h2 id="related-guides">Related guides</h2>
+<ul><li>[Quality](quality.md)</li></ul>
+<ul><li>[ADR: documentation contract](adr-0004-documentation-contract.md)</li></ul>
+<ul><li>[Evidence log](evidence-log.md)</li></ul></article></main></div><footer class="footer">Source: <a href="contributing.md">Markdown</a> · Machine metadata: <a href="contributing.json">JSON</a> · <a href="../docs-map.json">Documentation map</a></footer></body></html>

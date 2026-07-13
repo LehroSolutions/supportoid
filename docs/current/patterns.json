@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "patterns",
+  "title": "Patterns",
+  "status": "current",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/patterns.md",
+  "counterparts": {
+    "markdown": "current/patterns.md",
+    "html": "current/patterns.html",
+    "json": "current/patterns.json"
+  },
+  "summary": "Current patterns guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "primary-workflows",
+      "label": "Primary workflows"
+    },
+    {
+      "id": "recovery-behavior",
+      "label": "Recovery behavior"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "patterns",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "5e845d38a2a8a520e60097bb3554770c6eb594e6ea35170608a79e9b4bec1ecf",
+  "generatedAt": "2026-07-13T11:47:55.601807+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

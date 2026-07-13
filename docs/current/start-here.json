@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "start-here",
+  "title": "Start Here",
+  "status": "current",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/start-here.md",
+  "counterparts": {
+    "markdown": "current/start-here.md",
+    "html": "current/start-here.html",
+    "json": "current/start-here.json"
+  },
+  "summary": "A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "product-route",
+      "label": "Product route"
+    },
+    {
+      "id": "latest-public-changes",
+      "label": "Latest public changes"
+    },
+    {
+      "id": "choose-a-guide",
+      "label": "Choose a guide"
+    }
+  ],
+  "relatedGuides": [
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "start-here",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "62cd79b17b1c6d33371ec0a5dc0616f85702a1f414ac7ab7cc9800befa470c4d",
+  "generatedAt": "2026-07-13T11:47:55.601039+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

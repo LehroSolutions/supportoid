@@ -59,7 +59,7 @@ export default function Traces() {
       className="space-y-6"
     >
       <div className="mb-2">
-        <h2 className="text-display-sm font-serif text-foreground tracking-tight">
+        <h2 className="text-display-sm font-sans text-foreground tracking-tight">
           Traces
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -76,7 +76,7 @@ export default function Traces() {
           >
             <Activity className="h-4 w-4 text-accent" />
           </motion.div>
-          <h3 className="text-heading font-serif text-foreground">Session Traces</h3>
+          <h3 className="text-heading font-sans text-foreground">Session Traces</h3>
           <span className="ml-auto text-xs font-mono text-muted-foreground">
             {filtered.length} / {tracePage?.total || 0}
           </span>

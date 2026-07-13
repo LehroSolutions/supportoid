@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Pricing",
+  "group": "Guides",
+  "path": "pricing.md",
+  "lead": "This repository includes pricing-like data only as product-demo and test-fixture context. It is not a billing system of record.",
+  "content_markdown": "# Pricing Notes\n\nThis repository includes pricing-like data only as product-demo and test-fixture context. It is not a billing system of record.\n\n## Customer plan examples in seed content\n\nSanitized KB examples currently reference:\n\n- Free\n- Pro\n- Enterprise\n\nThese values are useful for demo flows and tests, but they should not be treated as authoritative commercial policy.\n\n## Model cost tracking\n\n`src/agents/cost_tracker.py` records approximate per-conversation usage for analytics. It is intended for:\n\n- local visibility\n- testing\n- support analytics\n\nIt is not intended for:\n\n- official invoicing\n- tax handling\n- region-aware billing\n- provider reconciliation\n\n## PersonaPlex note\n\nPersonaPlex is documented as an optional voice-oriented integration. The default text support path is the OpenAI-compatible `gpt-oss` and `gemma4` chain.\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

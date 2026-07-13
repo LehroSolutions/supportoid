@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "evidence-log",
+  "title": "Evidence Log",
+  "status": "current",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/evidence-log.md",
+  "counterparts": {
+    "markdown": "current/evidence-log.md",
+    "html": "current/evidence-log.html",
+    "json": "current/evidence-log.json"
+  },
+  "summary": "Current evidence log guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "observed-release-baseline",
+      "label": "Observed release baseline"
+    },
+    {
+      "id": "documentation-drift-review",
+      "label": "Documentation drift review"
+    },
+    {
+      "id": "validation-record",
+      "label": "Validation record"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "evidence-log",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "0b3b7483cb5d080c377d031fa4e512dcb9eadeb09d94914577d7c639d0faf653",
+  "generatedAt": "2026-07-13T11:47:55.604207+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SupportOID · Operations</title><link rel="stylesheet" href="../assets/docs.css"></head><body><header class="top"><div class="top-inner brand"><div><a href="../index.html"><strong>SupportOID documentation</strong></a><p>A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.</p></div><span>Current · 2026-07-13</span></div></header><div class="shell"><nav class="nav" aria-label="Documentation guides"><a href="../index.html">Documentation Home</a><a href="start-here.html" >Start Here</a><a href="foundations.html" >Foundations</a><a href="design-system.html" >Design System</a><a href="patterns.html" >Patterns</a><a href="architecture.html" >Architecture</a><a href="operations.html" aria-current="page">Operations</a><a href="security.html" >Security</a><a href="quality.html" >Quality</a><a href="contributing.html" >Contributing</a><a href="roadmap.html" >Roadmap</a><a href="adr-0004-documentation-contract.html" >Adr 0004 Documentation Contract</a><a href="evidence-log.html" >Evidence Log</a></nav><main><article class="card"><div class="meta"><span>Status: current</span><span>Last reviewed: 2026-07-13</span><span>Audience: Support operators, Administrators, Backend and frontend contributors</span></div><nav aria-label="On this page"><strong>On this page</strong><ol><li><a href="#purpose">Purpose</a></li><li><a href="#on-this-page">On this page</a></li><li><a href="#guidance">Guidance</a></li><li><a href="#verification">Verification</a></li><li><a href="#related-guides">Related guides</a></li><li><a href="#runtime-signals">Runtime signals</a></li><li><a href="#release-routine">Release routine</a></li></ol></nav><h1 id="top">Operations</h1>
+<p><strong>Counterparts:</strong> <a href="operations.html"><code>operations.html</code></a> · <a href="operations.json">`operations.json`</a></p>
+<ul><li>**Section:** Operations</li></ul>
+<ul><li>**Audience:** Operators and maintainers</li></ul>
+<ul><li>**Use when:** Running, diagnosing, or releasing the product.</li></ul>
+<ul><li>**Status:** Current</li></ul>
+<ul><li>**Last reviewed:** 2026-07-13</li></ul>
+<h2 id="purpose">Purpose</h2>
+<p>Provide the operational route for the current release without inventing deployment claims.</p>
+<h2 id="on-this-page">On this page</h2>
+<ul><li>[Runtime signals](#runtime-signals)</li></ul>
+<ul><li>[Release routine](#release-routine)</li></ul>
+<ul><li>[Verification](#verification)</li></ul>
+<h2 id="runtime-signals">Runtime signals</h2>
+<ul><li>Use health, traces, costs, knowledge quality, cache, memory, and rate-limit signals to diagnose service state.</li></ul>
+<h2 id="release-routine">Release routine</h2>
+<p>1. Run the product verification command: <code>Python compilation and project test suite</code>.</p>
+<p>2. Run <code>pnpm docs:check</code>.</p>
+<p>3. Update the release manifest through <code>pnpm docs:build</code>.</p>
+<p>4. Package only source, approved examples, and current documentation.</p>
+<h2 id="verification">Verification</h2>
+<ul><li>Record successful checks in an evidence log.</li></ul>
+<ul><li>Keep environment-specific credentials and data outside the public release.</li></ul>
+<h2 id="related-guides">Related guides</h2>
+<ul><li>[Architecture](architecture.md)</li></ul>
+<ul><li>[Security](security.md)</li></ul>
+<ul><li>[Quality](quality.md)</li></ul></article></main></div><footer class="footer">Source: <a href="operations.md">Markdown</a> · Machine metadata: <a href="operations.json">JSON</a> · <a href="../docs-map.json">Documentation map</a></footer></body></html>

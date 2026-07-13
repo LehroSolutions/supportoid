@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Open Source Release Checklist",
+  "group": "Guides",
+  "path": "open-source-release-checklist.md",
+  "lead": "Use this checklist before publishing SupportOID or a fork of it to GitHub.",
+  "content_markdown": "# Open-Source Release Checklist\n\nUse this checklist before publishing SupportOID or a fork of it to GitHub.\n\n## Repository hygiene\n\n- Add or verify `LICENSE`\n- Add or verify `NOTICE`\n- Confirm `.gitignore` and `.dockerignore` exclude runtime data and build output\n- Confirm no local databases, traces, feedback logs, or model artifacts are staged\n- Confirm internal-only tooling bundles are not included\n\n## Security posture\n\n- Confirm there are no shipped public credentials\n- Confirm `SUPPORTOID_ALLOW_LEGACY_ANON=false`\n- Confirm passwords are bcrypt-hashed\n- Confirm session storage is persistent\n- Confirm redaction tests pass\n- Confirm high-risk security-block tests pass\n\n## Documentation\n\n- README updated\n- quickstart tested\n- bootstrap workflow documented\n- deployment env vars documented\n- API and agent API docs current\n- AI evaluation docs current\n- disclosure path updated in `SECURITY.md`\n\n## Tests and builds\n\n- `python -m pytest -q`\n- `python -m pytest tests/test_oss_release_hardening.py -q`\n- `python -m pytest tests/test_ai_eval_scenarios.py -q`\n- `cd frontend && npm run build`\n- `cd convex-adapter && npm run build`\n\n## GitHub automation\n\n- CI workflow enabled\n- CodeQL enabled\n- dependency review enabled\n- Dependabot enabled\n- issue templates present\n- PR template present\n\n## Final review\n\n- Search the tree for personal secrets or local-only URLs\n- Verify no generated runtime content is committed\n- Verify demo KB content is sanitized\n- Verify release notes and changelog are accurate\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

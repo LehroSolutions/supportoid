@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "foundations",
+  "title": "Foundations",
+  "status": "current",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/foundations.md",
+  "counterparts": {
+    "markdown": "current/foundations.md",
+    "html": "current/foundations.html",
+    "json": "current/foundations.json"
+  },
+  "summary": "Current foundations guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "non-negotiable-rules",
+      "label": "Non-negotiable rules"
+    },
+    {
+      "id": "accessibility-baseline",
+      "label": "Accessibility baseline"
+    },
+    {
+      "id": "content-rules",
+      "label": "Content rules"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "foundations",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "5fde0759dcd114858852c6260adaa56d36b6d43f6cac369bd94824ea4515e0e1",
+  "generatedAt": "2026-07-13T11:47:55.601337+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

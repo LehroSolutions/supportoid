@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Use Cases",
+  "group": "Guides",
+  "path": "use-cases.md",
+  "lead": "",
+  "content_markdown": "# SupportOID Use Cases\n\n## External\n### Customer Support Automation\n- Resolve common customer questions (billing, account, onboarding, technical issues) through AI-assisted chat.\n- Escalate risky or high-friction conversations to human teams with priority and role hints.\n- Provide consistent answers backed by knowledge-base retrieval and quality scoring.\n\n### Team Analytics\n- View trace summaries for each support conversation.\n- Review model usage and estimated cost trends.\n- Track knowledge-base quality and coverage gaps for continuous improvement.\n\n### Multi-Role Operations\n- `support` users handle daily chats and feedback.\n- `analyst` users inspect trends, costs, and quality dashboards.\n- `admin` users manage migrations, sync jobs, and platform-wide settings.\n\n## Internal\n### Platform Engineering\n- Run a unified core backend used by web, API, and CLI.\n- Maintain compatibility for legacy command names and route aliases.\n- Support hybrid persistence: Convex adapter + SQLite fallback/cache.\n\n### Data and Reliability\n- Persist traces, feedback, and cost records with deterministic IDs.\n- Queue sync events for retry-safe adapter delivery.\n- Run migration jobs from legacy JSON/JSONL artifacts into canonical store.\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

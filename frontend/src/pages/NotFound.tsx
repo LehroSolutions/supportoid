@@ -16,7 +16,7 @@ export default function NotFound() {
         <AlertTriangle className="w-8 h-8 text-accent" />
       </div>
       <div className="text-center space-y-2">
-        <h1 className="text-display-lg font-serif text-foreground">404</h1>
+        <h1 className="text-display-lg font-sans text-foreground">404</h1>
         <p className="text-muted-foreground">This page doesn't exist</p>
       </div>
       <MagneticButton

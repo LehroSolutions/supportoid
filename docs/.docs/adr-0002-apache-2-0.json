@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Adr 0002 Apache 2 0",
+  "group": "ADRs",
+  "path": ".docs/adr-0002-apache-2-0.md",
+  "lead": "Accepted \u2014 2026-07-10",
+  "content_markdown": "# ADR-0002: Standardize on Apache License 2.0\n\n## Status\nAccepted \u2014 2026-07-10\n\n## Context\nRepositories previously mixed MIT, AGPL-family terms, dual commercial terms, or missing license metadata.\n\n## Decision\nAll products in this constellation ship under **Apache-2.0** only, with root `LICENSE`, `NOTICE`, and package metadata aligned.\n\n## Consequences\n- Removes dual-license ambiguity for open distribution\n- Requires updating badges/README/package manifests\n- Commercial dual-license files are retired where present\n\n## Related\n- [License](./license.md)\n- [Security](./security.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

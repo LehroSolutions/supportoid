@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Adr 0003 Package Manager Bun",
+  "group": "ADRs",
+  "path": ".docs/adr-0003-package-manager-bun.md",
+  "lead": "Accepted \u2014 hybrid (Bun for JS/TS only)",
+  "content_markdown": "# ADR-0003: Package manager selection (Bun vs alternatives)\n\n## Status\nAccepted \u2014 hybrid (Bun for JS/TS only)\n\n## Context\nThe constellation mixes Next.js/Vite/Node CLIs with pure Python services. Bun is excellent for JS/TS install + runtime ergonomics, but it is not a Python package manager.\n\n## Decision\nSupportOID is hybrid: Python backend + JS/TS frontend/adapters. **Bun is preferred only for the JS/TS packages** (`frontend`, `convex-adapter`). The Python backend remains pip/venv (or uv) based.\n\n### Recommendation\nDo not force Bun onto the Python service layer.\n\n## Bun ideal when\n- Dependencies are npm packages\n- Scripts are Node/TypeScript CLIs or Vite/Next apps\n- Fast local install and `bunx` DX matter\n\n## Bun not ideal when\n- Runtime is CPython/FastAPI/pytest\n- Native Python packaging/metadata is required\n- Tooling assumes pip/uv lock semantics exclusively\n\n## Consequences\n- JS/TS packages declare `packageManager: bun@...` and ship `bunfig.toml`\n- npm lockfiles are archived as legacy artifacts\n- Contributors generate `bun.lock` with `bun install` on a network machine\n- Python packages keep their existing tooling\n\n## Related\n- [How to Use](./how-to-use.md)\n- [Architecture](./architecture.md)\n- [Index](./index.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

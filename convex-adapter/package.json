@@ -6,8 +6,11 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts"
+    "start": "bun dist/index.js",
+    "dev": "bun src/index.ts",
+    "package:manager": "bun --version",
+    "format": "prettier --write \"src/**/*.ts\" \"*.{json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"*.{json,md,yml,yaml}\""
   },
   "dependencies": {
     "express": "^4.19.2"
@@ -16,7 +19,14 @@
     "@types/express": "^4.17.21",
     "@types/node": "^22.13.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "prettier": "^3.5.3"
+  },
+  "license": "Apache-2.0",
+  "author": "Lehro Solutions",
+  "packageManager": "bun@1.3.14",
+  "engines": {
+    "node": ">=24",
+    "bun": ">=1.3.14"
   }
 }
-

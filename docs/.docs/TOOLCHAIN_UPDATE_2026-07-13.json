@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "TOOLCHAIN_UPDATE_2026-07-13",
+  "title": "Toolchain Update \u2014 2026-07-13",
+  "status": "current",
+  "audience": ["Maintainers", "Release engineers"],
+  "useWhen": "Updating Bun, Node, CI, or formatting policy.",
+  "sourceOfTruth": "TOOLCHAIN_UPDATE_2026-07-13.md",
+  "counterparts": {
+    "markdown": "TOOLCHAIN_UPDATE_2026-07-13.md",
+    "html": "TOOLCHAIN_UPDATE_2026-07-13.html",
+    "json": "TOOLCHAIN_UPDATE_2026-07-13.json"
+  },
+  "summary": "Records the Bun 1.3.14 and Node 24 CI modernization.",
+  "sections": [
+    {
+      "id": "decision",
+      "label": "Decision"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    }
+  ],
+  "relatedGuides": ["../current/quality", "../current/evidence-log"],
+  "keywords": ["bun", "node", "ci", "toolchain"],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "572eccad20cd98d5c50c7fce0f4f3bbd8a1e2a0f1135e20fc11a34e76fc24f9f",
+  "generatedAt": "2026-07-13T14:45:31.223723+00:00",
+  "validation": {
+    "state": "verified"
+  }
+}

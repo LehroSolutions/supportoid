@@ -33,9 +33,9 @@ Optional frontend and adapter dependencies:
 
 ```powershell
 cd frontend
-npm install
+bun install
 cd ..\convex-adapter
-npm install
+bun install
 cd ..
 ```
 
@@ -65,8 +65,8 @@ Open [http://localhost:8001](http://localhost:8001).
 
 ```powershell
 cd convex-adapter
-npm run build
-npm start
+bun run build
+bun start
 ```
 
 ## Public surfaces
@@ -113,10 +113,67 @@ python -m src.cli status
 python -m src.cli traces
 python -m src.cli sync --limit 100
 python -m pytest -q
-cd frontend; npm run build
-cd ..\convex-adapter; npm run build
+cd frontend; bun run build
+cd ..\convex-adapter; bun run build
 ```
 
 ## License
 
-Licensed under Apache 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+Copyright © 2026 Lehro Solutions. Licensed under the [Apache License 2.0](LICENSE). See [NOTICE](NOTICE).
+
+## Documentation
+
+Canonical docs hub: [`docs/.docs/index.md`](docs/.docs/index.md)
+
+## Package managers
+
+- **Frontend / convex-adapter:** Bun-first (`bun install`, `bun run build`)
+- **Python backend:** venv + pip/uv (Bun is not used for Python deps)
+
+See `docs/.docs/adr-0003-package-manager-bun.md`.
+
+## Install
+
+See [INSTALL.md](INSTALL.md) for Bun workspaces (frontend/adapter) and Python backend setup.
+
+```bash
+bun install
+bun run build:js
+```
+
+## Security
+
+See [SECURITY.md](SECURITY.md).
+
+<!-- docs-system:start -->
+
+## Documentation
+
+The current public documentation is available in [`docs/index.html`](docs/index.html). Start with [`docs/current/start-here.md`](docs/current/start-here.md) for scope, current changes, workflows, architecture, security, quality, and contribution guidance.
+
+### Latest public changes
+
+- Operations and analytics dashboards
+- Knowledge-quality surfaces
+- Trace search and expansion
+- Open-source release hardening
+
+Documentation is maintained as canonical Markdown plus generated HTML and JSON counterparts. Run `pnpm docs:build` after changing `docs/current/*.md` and `pnpm docs:check` before a public release.
+<!-- docs-system:end -->
+
+<!-- bun-toolchain:start -->
+
+## Bun and CI
+
+This repository uses **Bun 1.3.14** and targets **Node 24+** for JavaScript tooling and CI.
+
+```bash
+rm -f package-lock.json
+bun install
+bun run build
+bun run test
+bun run docs:check
+```
+
+Do not use `npm ci`; Bun is the canonical install path. Run `bun install` after dependency changes and commit the resulting `bun.lock`.
+<!-- bun-toolchain:end -->

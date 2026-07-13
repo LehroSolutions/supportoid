@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Skills",
+  "group": "Guides",
+  "path": ".docs/skills.md",
+  "lead": "1. Read package manifests and entrypoints",
+  "content_markdown": "# SupportOID Skills & Operator Playbooks\n\n## Recon-first gate\n1. Read package manifests and entrypoints\n2. Locate auth/trust boundaries\n3. Run the cheapest verification command\n4. Patch smallest complete safe change\n\n## Delivery checklist\n- Feature or fix lands with tests/smoke when feasible\n- Docs updated in md + html + json twins\n- License remains Apache-2.0\n- Security log updated if a build/runtime break revealed a flaw\n\n## Related\n- [How to Use](./how-to-use.md)\n- [Security](./security.md)\n- [Architecture](./architecture.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

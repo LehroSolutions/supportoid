@@ -54,7 +54,7 @@ export default function Analytics() {
       className="space-y-6"
     >
       <div className="mb-2">
-        <h2 className="text-display-sm font-serif text-foreground tracking-tight">Analytics</h2>
+        <h2 className="text-display-sm font-sans text-foreground tracking-tight">Analytics</h2>
         <p className="text-sm text-muted-foreground mt-1">Cross-model usage and operating cost signals.</p>
       </div>
 
@@ -68,7 +68,7 @@ export default function Analytics() {
           </motion.div>
           <div>
             <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Total Cost</p>
-            <p className="text-title font-serif text-foreground tabular-nums">{formatCurrency(costs.total_cost_usd)}</p>
+            <p className="text-title font-sans text-foreground tabular-nums">{formatCurrency(costs.total_cost_usd)}</p>
           </div>
         </div>
 
@@ -99,7 +99,7 @@ export default function Analytics() {
             <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }} className="p-2 bg-accent/10 rounded-lg">
               <Phone className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-heading font-serif text-foreground">Calls by Model</h3>
+            <h3 className="text-heading font-sans text-foreground">Calls by Model</h3>
           </div>
           <div className="space-y-3">
             {Object.entries(costs.calls_by_model).map(([model, count], i) => (
@@ -130,7 +130,7 @@ export default function Analytics() {
             <motion.div whileHover={{ rotate: -15 }} transition={{ duration: 0.3 }} className="p-2 bg-accent/10 rounded-lg">
               <Coins className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-heading font-serif text-foreground">Cost by Model</h3>
+            <h3 className="text-heading font-sans text-foreground">Cost by Model</h3>
           </div>
           <div className="space-y-3">
             {Object.entries(costs.cost_by_model).map(([model, cost], i) => (
@@ -162,7 +162,7 @@ export default function Analytics() {
           <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.5 }} className="p-2 bg-accent/10 rounded-lg">
             <TrendingUp className="w-4 h-4 text-accent" />
           </motion.div>
-          <h3 className="text-heading font-serif text-foreground">Runtime</h3>
+          <h3 className="text-heading font-sans text-foreground">Runtime</h3>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[

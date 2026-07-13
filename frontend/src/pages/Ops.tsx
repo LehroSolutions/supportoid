@@ -93,7 +93,7 @@ function ActionCard({
         <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
           <Icon className="w-4 h-4 text-accent" />
         </motion.div>
-        <h3 className="text-sm font-serif text-foreground">{title}</h3>
+        <h3 className="text-sm font-sans text-foreground">{title}</h3>
       </div>
       <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
       <div className="flex items-center gap-3">
@@ -206,7 +206,7 @@ export default function Ops() {
       className="space-y-6"
     >
       <motion.div variants={containerVariants} className="mb-2">
-        <h2 className="text-display-sm font-serif text-foreground tracking-tight">Operations</h2>
+        <h2 className="text-display-sm font-sans text-foreground tracking-tight">Operations</h2>
         <p className="text-sm text-muted-foreground mt-1">Infrastructure control plane — security, caching, memory, sessions.</p>
       </motion.div>
 
@@ -255,7 +255,7 @@ export default function Ops() {
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
               <Shield className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-sm font-serif text-foreground">Security</h3>
+            <h3 className="text-sm font-sans text-foreground">Security</h3>
           </div>
           {security && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -291,7 +291,7 @@ export default function Ops() {
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
               <Gauge className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-sm font-serif text-foreground">Rate Limiting</h3>
+            <h3 className="text-sm font-sans text-foreground">Rate Limiting</h3>
           </div>
           {rateLimit && (
             <div className="space-y-2">
@@ -327,7 +327,7 @@ export default function Ops() {
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
               <Database className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-sm font-serif text-foreground">Cache</h3>
+            <h3 className="text-sm font-sans text-foreground">Cache</h3>
           </div>
           {cache && (
             <div className="grid grid-cols-2 gap-3">
@@ -359,7 +359,7 @@ export default function Ops() {
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
               <MemoryStick className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-sm font-serif text-foreground">Memory</h3>
+            <h3 className="text-sm font-sans text-foreground">Memory</h3>
           </div>
           {memory && (
             <div className="grid grid-cols-2 gap-3">
@@ -391,7 +391,7 @@ export default function Ops() {
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
               <Users className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-sm font-serif text-foreground">Sessions</h3>
+            <h3 className="text-sm font-sans text-foreground">Sessions</h3>
             {sessions && (
               <span className="ml-auto text-xs font-mono text-muted-foreground">
                 {sessions.active} active
@@ -441,7 +441,7 @@ export default function Ops() {
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
               <Cpu className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-sm font-serif text-foreground">Tier Config</h3>
+            <h3 className="text-sm font-sans text-foreground">Tier Config</h3>
           </div>
           {tiers && (
             <div className="space-y-3">

@@ -52,3 +52,7 @@ data/pytest-cache-files-*/
 .DS_Store
 Thumbs.db
 *.log
+coverage/
+
+# Bun is the canonical package manager and lockfile authority
+package-lock.json

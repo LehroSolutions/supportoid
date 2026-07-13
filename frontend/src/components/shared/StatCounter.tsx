@@ -64,7 +64,7 @@ export default memo(function StatCounter({
       transition={{ type: 'spring', stiffness: 200, damping: 20, delay }}
       className={cn("text-center", className)}
     >
-      <div className="text-display-sm font-serif text-foreground tabular-nums tracking-tight">
+      <div className="text-display-sm font-sans text-foreground tabular-nums tracking-tight">
         {prefix}{formattedValue}{suffix}
       </div>
       <div className="text-xs text-muted-foreground mt-1.5 uppercase tracking-wider font-mono">{label}</div>

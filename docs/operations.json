@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Operations",
+  "group": "Guides",
+  "path": "operations.md",
+  "lead": "This guide covers day-2 operations for a self-hosted SupportOID deployment.",
+  "content_markdown": "# Operations\n\nThis guide covers day-2 operations for a self-hosted SupportOID deployment.\n\n## Daily checks\n\nRecommended quick checks:\n\n```powershell\npython -m src.cli status\npython -m src.cli traces\npython -m src.cli costs\n```\n\nHTTP checks:\n\n- `GET /api/v1/health`\n- `GET /api/v1/admin/security/report`\n\n## Backups\n\nBack up at least:\n\n- `data/runtime/app/supportoid.db`\n- `data/runtime/knowledge`\n\nIf you use local model artifacts or training artifacts, include:\n\n- `data/runtime/models`\n- `data/runtime/training`\n\n## Restore\n\n1. Stop the app\n2. Restore the SQLite file and runtime directories\n3. Start the app\n4. Verify `/api/v1/health`\n5. Verify admin login and traces access\n\n## Retention and cleanup\n\nDefault retention:\n\n- traces: 30 days\n- feedback: 90 days\n\nTune with:\n\n- `SUPPORTOID_TRACE_RETENTION_DAYS`\n- `SUPPORTOID_FEEDBACK_RETENTION_DAYS`\n\n## Service accounts\n\nFor automation credentials:\n\n- create them through `/api/v1/agent/service-accounts`\n- rotate them regularly\n- revoke unused accounts\n- scope them to the minimum required capabilities\n\n## Sync and migration\n\nUseful commands:\n\n```powershell\npython -m src.cli migrate\npython -m src.cli sync --limit 100\n```\n\nUse migration when importing legacy JSON or JSONL artifacts. Use sync to flush queued adapter events.\n\n## Incident handling\n\nSuggested incident triage order:\n\n1. Check `/api/v1/health`\n2. Confirm login still works\n3. Review recent traces\n4. Check sync backlog and adapter health\n5. Review admin security report\n\nIf the adapter is down, the app can continue operating on SQLite while sync remains queued.\n\n## Release verification\n\nBefore tagging or publishing:\n\n- run the Python tests\n- run the frontend build\n- run the adapter build\n- confirm no runtime DBs or logs are staged\n- verify docs still match the current runtime behavior\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

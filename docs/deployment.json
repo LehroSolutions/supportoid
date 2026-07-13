@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Deployment",
+  "group": "Guides",
+  "path": "deployment.md",
+  "lead": "SupportOID supports local self-hosting and Docker-based deployment. Treat this repository as a source release, not a registry-published package.",
+  "content_markdown": "# Deployment\n\nSupportOID supports local self-hosting and Docker-based deployment. Treat this repository as a source release, not a registry-published package.\n\n## Local self-host\n\nBackend:\n\n```powershell\npython -m pip install -r requirements.txt\npython -m src.cli bootstrap-admin --username admin --password \"change-this-password\"\npython -m src.cli serve\n```\n\nOptional demo content:\n\n```powershell\npython -m src.cli seed-demo\n```\n\nOptional adapter:\n\n```powershell\ncd convex-adapter\nnpm install\nnpm run build\nnpm start\n```\n\nThe adapter is local/self-hosted. The open-source repo should not point at a real Convex Cloud deployment.\n\n## Docker\n\nBring up the backend and adapter:\n\n```powershell\ndocker compose up --build\n```\n\nThe Docker image:\n\n- installs from `requirements.txt`\n- includes `bcrypt`\n- builds the React frontend into `/app/frontend/dist`\n- runs as a non-root user\n- exposes port `8001`\n- includes a healthcheck against `/api/v1/health`\n\n## Persistent data\n\nThe main runtime volume is `./data`, which contains:\n\n- `runtime/app/supportoid.db`\n- `runtime/knowledge`\n- `runtime/feedback`\n- `runtime/training`\n- `runtime/costs`\n- `runtime/traces`\n\nDo not commit runtime data back into Git.\n\n## Recommended production topology\n\n- reverse proxy with TLS termination\n- FastAPI app behind the proxy\n- optional adapter on a private network\n- persistent volume for the SQLite database and runtime directories\n\n## Required environment variables\n\nMinimum practical production set:\n\n```text\nSUPPORTOID_DEPLOYMENT_PROFILE=production\nSUPPORTOID_HOST=0.0.0.0\nSUPPORTOID_PORT=8001\nSUPPORTOID_SQLITE_PATH=/app/data/runtime/app/supportoid.db\nSUPPORTOID_ALLOW_LEGACY_ANON=false\n```\n\nFor live model calls, also provide the relevant LLM endpoint and credentials.\n\n## Reverse proxy notes\n\nAt the proxy layer:\n\n- force HTTPS\n- preserve `X-Forwarded-*` headers correctly\n- keep cookie paths intact\n- restrict large request bodies if your environment requires it\n\n## What not to do\n\n- Do not rely on `SUPPORTOID_AUTH_USERS_JSON` as your long-term production user management path.\n- Do not expose the adapter publicly without additional network controls.\n- Do not connect this public source tree to your organization's real Convex Cloud project.\n- Do not ship a pre-populated production database as part of your release artifact.\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

@@ -55,7 +55,7 @@ export default function Chat() {
       className="flex flex-col h-[calc(100vh-140px)] gap-4"
     >
       <div className="mb-1">
-        <h2 className="text-display-sm font-serif text-foreground tracking-tight">Chat</h2>
+        <h2 className="text-display-sm font-sans text-foreground tracking-tight">Chat</h2>
         <p className="text-sm text-muted-foreground mt-1">Interact with the multi-agent orchestration system.</p>
       </div>
 
@@ -70,7 +70,7 @@ export default function Chat() {
               <Bot className="w-6 h-6 text-accent" />
             </div>
             <div>
-              <p className="text-heading font-serif text-foreground">Start a conversation</p>
+              <p className="text-heading font-sans text-foreground">Start a conversation</p>
               <p className="text-sm text-muted-foreground mt-1">Send a message to begin interacting with SupportOID</p>
             </div>
           </motion.div>

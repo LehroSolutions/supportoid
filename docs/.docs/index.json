@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Index",
+  "group": "Guides",
+  "path": ".docs/index.md",
+  "lead": "Updated: 2026-07-10",
+  "content_markdown": "# SupportOID Documentation Hub\n\nUpdated: 2026-07-10\n\nAI-native support orchestration platform with FastAPI backend, Vite frontend, and ops surfaces.\n\n**License:** Apache-2.0  \n**Copyright:** 2026 Lehro Solutions\n\n## Ultra-linked index\n\n- [Documentation Hub](./index.md) \u00b7 [html](./index.html) \u00b7 [json](./index.json)\n- [Architecture](./architecture.md) \u00b7 [html](./architecture.html) \u00b7 [json](./architecture.json)\n- [Design System](./design-system.md) \u00b7 [html](./design-system.html) \u00b7 [json](./design-system.json)\n- [How to Use](./how-to-use.md) \u00b7 [html](./how-to-use.html) \u00b7 [json](./how-to-use.json)\n- [Roadmap](./roadmap.md) \u00b7 [html](./roadmap.html) \u00b7 [json](./roadmap.json)\n- [Skills & Operator Playbooks](./skills.md) \u00b7 [html](./skills.html) \u00b7 [json](./skills.json)\n- [Security](./security.md) \u00b7 [html](./security.html) \u00b7 [json](./security.json)\n- [License](./license.md) \u00b7 [html](./license.html) \u00b7 [json](./license.json)\n- [ADR-0001: Ultra-linked docs system](./adr-0001-docs-system.md) \u00b7 [html](./adr-0001-docs-system.html) \u00b7 [json](./adr-0001-docs-system.json)\n- [ADR-0002: Apache License 2.0](./adr-0002-apache-2-0.md) \u00b7 [html](./adr-0002-apache-2-0.html) \u00b7 [json](./adr-0002-apache-2-0.json)\n- [ADR-0003: Package manager (Bun)](./adr-0003-package-manager-bun.md) \u00b7 [html](./adr-0003-package-manager-bun.html) \u00b7 [json](./adr-0003-package-manager-bun.json)\n\n## Product snapshot\n- Domain: Customer support AI\n- Stack: Python FastAPI, React, Vite, Framer Motion, SQLite automation store\n- Entrypoints:\n  - `src/main.py`\n  - `src/app/auth.py`\n  - `frontend/src/pages/Dashboard.tsx`\n\n## Start here\n1. Read [How to Use](./how-to-use.md)\n2. Skim [Architecture](./architecture.md)\n3. Check [Security](./security.md)\n4. Confirm [License](./license.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

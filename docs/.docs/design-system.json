@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Design System",
+  "group": "Guides",
+  "path": ".docs/design-system.md",
+  "lead": "Operational command center",
+  "content_markdown": "# SupportOID Design System\n\n## Tone\nOperational command center\n\n## Mode\n`dark`\n\n## Core tokens\n- Background: `#141210`\n- Panel: `#1d1916`\n- Text: `#f4efe8`\n- Muted: `#a89c8f`\n- Line: `rgba(255,236,210,0.12)`\n- Accent: `#e8b14a`\n- Accent 2: `#f0c36a`\n- Success / Warning / Danger: `#4fbf8b` / `#e8b14a` / `#e06a55`\n- Radius: `12px`\n- Font: `Arial, Helvetica, sans-serif`\n- Mono: `Consolas, monospace`\n\n## Docs integration\n- Shared CSS: [design-system.css](./design-system.css)\n- Machine tokens: [design-system.tokens.json](./design-system.tokens.json)\n- All ultra-linked HTML pages are rendered with this theme (not a generic shared skin).\n\n## Operator UX standards\n- Semantic HTML and visible focus states\n- High-contrast product palette (no generic purple-gradient AI slop)\n- Prefer product density and operational clarity\n- Respect `prefers-reduced-motion`\n\n## Related\n- [Architecture](./architecture.md)\n- [How to Use](./how-to-use.md)\n- [Skills](./skills.md)\n- [Index](./index.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

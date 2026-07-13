@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Roadmap",
+  "group": "Guides",
+  "path": ".docs/roadmap.md",
+  "lead": "Status snapshot as of 2026-07-10.",
+  "content_markdown": "# SupportOID Roadmap\n\nStatus snapshot as of 2026-07-10.\n\n- [x] Ops/analytics dashboards\n- [x] Knowledge quality surfaces\n- [x] Open-source release hardening\n\n## Documentation loop\n- Keep roadmap checkboxes honest after each delivery\n- Link security findings into [Security](./security.md)\n- Record architectural shifts as ADRs\n\n## Related\n- [Index](./index.md)\n- [ADR-0001](./adr-0001-docs-system.md)\n- [Skills](./skills.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

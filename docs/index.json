@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0",
+  "title": "SupportOID documentation",
+  "portal": "index.html",
+  "map": "docs-map.json",
+  "guides": [
+    "current/start-here.json",
+    "current/foundations.json",
+    "current/design-system.json",
+    "current/patterns.json",
+    "current/architecture.json",
+    "current/operations.json",
+    "current/security.json",
+    "current/quality.json",
+    "current/contributing.json",
+    "current/roadmap.json",
+    "current/adr-0004-documentation-contract.json",
+    "current/evidence-log.json"
+  ]
+}

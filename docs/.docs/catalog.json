@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Catalog",
+  "group": "Guides",
+  "path": ".docs/catalog.md",
+  "lead": "",
+  "content_markdown": "# Docs catalog\n\n- [Documentation Hub](./index.md)\n- [Architecture](./architecture.md)\n- [Design System](./design-system.md)\n- [How to Use](./how-to-use.md)\n- [Roadmap](./roadmap.md)\n- [Skills & Operator Playbooks](./skills.md)\n- [Security](./security.md)\n- [License](./license.md)\n- [ADR-0001: Ultra-linked docs system](./adr-0001-docs-system.md)\n- [ADR-0002: Apache License 2.0](./adr-0002-apache-2-0.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

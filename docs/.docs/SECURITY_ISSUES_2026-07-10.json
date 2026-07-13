@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Security Issues 2026 07 10",
+  "group": "Project",
+  "path": ".docs/SECURITY_ISSUES_2026-07-10.md",
+  "lead": "No new breaking build/runtime security defects were recorded while generating this docs pack.",
+  "content_markdown": "# Security issues log \u2014 2026-07-10\n\nNo new breaking build/runtime security defects were recorded while generating this docs pack.\n\nHistorical notes may live under `archive/` when migrated from older `.docs` folders.\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

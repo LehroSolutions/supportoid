@@ -26,4 +26,3 @@
 - Persist traces, feedback, and cost records with deterministic IDs.
 - Queue sync events for retry-safe adapter delivery.
 - Run migration jobs from legacy JSON/JSONL artifacts into canonical store.
-

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "quality",
+  "title": "Quality",
+  "status": "current",
+  "audience": [
+    "Contributors",
+    "Maintainers"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/quality.md",
+  "counterparts": {
+    "markdown": "current/quality.md",
+    "html": "current/quality.html",
+    "json": "current/quality.json"
+  },
+  "summary": "Current quality guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "required-gates",
+      "label": "Required gates"
+    },
+    {
+      "id": "documentation-gate",
+      "label": "Documentation gate"
+    },
+    {
+      "id": "definition-of-done",
+      "label": "Definition of done"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "quality",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "4c85763d571f7315035a3ad768c6424e0830f2bc479b258598016918312a66b9",
+  "generatedAt": "2026-07-13T11:47:55.603179+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

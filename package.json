@@ -1,0 +1,27 @@
+{
+  "name": "supportoid",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SupportOID hybrid root \u2014 Bun workspaces for frontend + convex-adapter; Python backend uses venv/pip",
+  "license": "Apache-2.0",
+  "author": "Lehro Solutions",
+  "packageManager": "bun@1.3.14",
+  "engines": {
+    "node": ">=24",
+    "bun": ">=1.3.14"
+  },
+  "scripts": {
+    "dev:web": "bun run --filter supportoid-frontend dev",
+    "build:web": "bun run --filter supportoid-frontend build",
+    "build:adapter": "bun run --filter supportoid-convex-adapter build",
+    "build:js": "bun run build:web && bun run build:adapter",
+    "install:js": "bun install",
+    "package:manager": "bun --version",
+    "docs:build": "node scripts/docs.mjs build",
+    "docs:check": "node scripts/docs.mjs check"
+  },
+  "workspaces": [
+    "frontend",
+    "convex-adapter"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Architecture",
+  "group": "Guides",
+  "path": ".docs/architecture.md",
+  "lead": "AI-native support orchestration platform with FastAPI backend, Vite frontend, and ops surfaces.",
+  "content_markdown": "# SupportOID Architecture\n\n  ## Intent\n  AI-native support orchestration platform with FastAPI backend, Vite frontend, and ops surfaces.\n\n  ## Runtime shape\n  - Domain: **Customer support AI**\n  - Primary stack: Python FastAPI, React, Vite, Framer Motion, SQLite automation store\n  - Key entrypoints:\n- `src/main.py`\n- `src/app/auth.py`\n- `frontend/src/pages/Dashboard.tsx`\n\n  ## Boundaries\n  - Validate inputs at trust boundaries.\n  - Keep authorization explicit near data access.\n  - Prefer recoverable errors over silent failure.\n  - Keep side effects isolated and observable.\n\n  ## Related\n  - [Design System](./design-system.md)\n  - [Security](./security.md)\n  - [ADR-0001](./adr-0001-docs-system.md)\n  - [Roadmap](./roadmap.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

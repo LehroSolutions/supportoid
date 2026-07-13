@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "adr-0004-documentation-contract",
+  "title": "ADR-0004: Documentation counterpart contract",
+  "status": "accepted",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/adr-0004-documentation-contract.md",
+  "counterparts": {
+    "markdown": "current/adr-0004-documentation-contract.md",
+    "html": "current/adr-0004-documentation-contract.html",
+    "json": "current/adr-0004-documentation-contract.json"
+  },
+  "summary": "Current adr 0004 documentation contract guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "context",
+      "label": "Context"
+    },
+    {
+      "id": "decision",
+      "label": "Decision"
+    },
+    {
+      "id": "positive-consequences",
+      "label": "Positive consequences"
+    },
+    {
+      "id": "trade-offs",
+      "label": "Trade-offs"
+    },
+    {
+      "id": "alternatives-considered",
+      "label": "Alternatives considered"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "adr-0004-documentation-contract",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "81eb71f97f8270a73355c78ae26c4e12cd17df0cac002ec662e9f6f8c2b3dd5d",
+  "generatedAt": "2026-07-13T11:47:55.603965+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

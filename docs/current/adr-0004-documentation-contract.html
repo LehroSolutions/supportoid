@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SupportOID · ADR-0004: Documentation counterpart contract</title><link rel="stylesheet" href="../assets/docs.css"></head><body><header class="top"><div class="top-inner brand"><div><a href="../index.html"><strong>SupportOID documentation</strong></a><p>A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.</p></div><span>Current · 2026-07-13</span></div></header><div class="shell"><nav class="nav" aria-label="Documentation guides"><a href="../index.html">Documentation Home</a><a href="start-here.html" >Start Here</a><a href="foundations.html" >Foundations</a><a href="design-system.html" >Design System</a><a href="patterns.html" >Patterns</a><a href="architecture.html" >Architecture</a><a href="operations.html" >Operations</a><a href="security.html" >Security</a><a href="quality.html" >Quality</a><a href="contributing.html" >Contributing</a><a href="roadmap.html" >Roadmap</a><a href="adr-0004-documentation-contract.html" aria-current="page">Adr 0004 Documentation Contract</a><a href="evidence-log.html" >Evidence Log</a></nav><main><article class="card"><div class="meta"><span>Status: accepted</span><span>Last reviewed: 2026-07-13</span><span>Audience: Support operators, Administrators, Backend and frontend contributors</span></div><nav aria-label="On this page"><strong>On this page</strong><ol><li><a href="#context">Context</a></li><li><a href="#decision">Decision</a></li><li><a href="#positive-consequences">Positive consequences</a></li><li><a href="#trade-offs">Trade-offs</a></li><li><a href="#alternatives-considered">Alternatives considered</a></li><li><a href="#verification">Verification</a></li><li><a href="#related-guides">Related guides</a></li></ol></nav><h1 id="top">ADR-0004: Documentation counterpart contract</h1>
+<p><strong>Counterparts:</strong> <a href="adr-0004-documentation-contract.html"><code>adr-0004-documentation-contract.html</code></a> · <a href="adr-0004-documentation-contract.json">`adr-0004-documentation-contract.json`</a></p>
+<ul><li>**Section:** ADRs</li></ul>
+<ul><li>**Audience:** Maintainers and contributors</li></ul>
+<ul><li>**Use when:** Creating or reviewing durable product documentation.</li></ul>
+<ul><li>**Status:** Accepted</li></ul>
+<ul><li>**Last reviewed:** 2026-07-13</li></ul>
+<h2 id="context">Context</h2>
+<p>The public release contained useful documentation but counterpart coverage, release manifests, and build validation were inconsistent across guide families.</p>
+<h2 id="decision">Decision</h2>
+<p>Use <code>docs/current/*.md</code> as canonical current guidance. Generate an accessible HTML reader view and compact JSON navigation/search representation for each canonical guide. Generate the portal, maps, release manifest, and validation report from the same source set.</p>
+<h2 id="positive-consequences">Positive consequences</h2>
+<ul><li>Readers, agents, and maintainers have synchronized representations.</li></ul>
+<ul><li>Public README files can link to one stable Documentation Home.</li></ul>
+<ul><li>CI can reject incomplete or stale documentation artifacts.</li></ul>
+<h2 id="trade-offs">Trade-offs</h2>
+<ul><li>Documentation updates must include generated output.</li></ul>
+<ul><li>Historical documents remain useful evidence but are not treated as current guidance.</li></ul>
+<h2 id="alternatives-considered">Alternatives considered</h2>
+<ul><li>Maintain Markdown only: rejected because public browsing and machine navigation would drift.</li></ul>
+<ul><li>Hand-edit every counterpart: rejected because it increases duplication and review cost.</li></ul>
+<h2 id="verification">Verification</h2>
+<p>Run <code>pnpm docs:build</code> followed by `pnpm docs:check`.</p>
+<h2 id="related-guides">Related guides</h2>
+<ul><li>[Contributing](contributing.md)</li></ul>
+<ul><li>[Quality](quality.md)</li></ul>
+<ul><li>[Evidence log](evidence-log.md)</li></ul></article></main></div><footer class="footer">Source: <a href="adr-0004-documentation-contract.md">Markdown</a> · Machine metadata: <a href="adr-0004-documentation-contract.json">JSON</a> · <a href="../docs-map.json">Documentation map</a></footer></body></html>

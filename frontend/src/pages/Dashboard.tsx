@@ -56,6 +56,16 @@ export default function Dashboard() {
     { label: 'KB entries', value: stats.knowledge_entries.toLocaleString(), icon: Database },
   ]
 
+  const cardEnter = { y: 16, opacity: 0 }
+  const cardShow = { y: 0, opacity: 1 }
+  const metricEnter = { opacity: 0, y: 8 }
+  const metricShow = { opacity: 1, y: 0 }
+  const iconHover = { rotate: 12, scale: 1.1 }
+  const healthHover = { rotate: 180 }
+  const metricHover = { scale: 1.02 }
+  const healthTransition = { duration: 0.5 }
+  const metricTransition = (index: number) => ({ delay: 0.35 + index * 0.04 })
+
   const cacheHitPct = stats.cache_hit_rate
   const errorRate = stats.total_processed > 0
     ? ((stats.errors / stats.total_processed) * 100)
@@ -69,7 +79,7 @@ export default function Dashboard() {
       className="space-y-6"
     >
       <motion.div variants={containerVariants} className="mb-2">
-        <h2 className="text-display-sm font-serif text-foreground tracking-tight">Dashboard</h2>
+        <h2 className="text-display-sm font-sans text-foreground tracking-tight">Dashboard</h2>
         <p className="text-sm text-muted-foreground mt-1">Core platform status — API, CLI, and web runtime.</p>
       </motion.div>
 
@@ -131,7 +141,7 @@ export default function Dashboard() {
             >
               <Cpu className="w-4 h-4 text-accent" />
             </motion.div>
-            <h3 className="text-heading font-serif text-foreground">Model Health</h3>
+            <h3 className="text-heading font-sans text-foreground">Model Health</h3>
             <StatusPill ok={stats.model_accuracy > 0.8} label={formatPercent(stats.model_accuracy, 0)} />
           </div>
 

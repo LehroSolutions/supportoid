@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "security",
+  "title": "Security",
+  "status": "current",
+  "audience": [
+    "Support operators",
+    "Administrators",
+    "Backend and frontend contributors"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/security.md",
+  "counterparts": {
+    "markdown": "current/security.md",
+    "html": "current/security.html",
+    "json": "current/security.json"
+  },
+  "summary": "Current security guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "current-safeguards",
+      "label": "Current safeguards"
+    },
+    {
+      "id": "contributor-rules",
+      "label": "Contributor rules"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality",
+    "contributing"
+  ],
+  "keywords": [
+    "supportoid",
+    "security",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "f50bdec3144d5ede2e7b5596bb6d66c384dcca129ee182c3df314967280e64f2",
+  "generatedAt": "2026-07-13T11:47:55.602867+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

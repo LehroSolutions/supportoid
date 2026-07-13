@@ -66,7 +66,7 @@ export default function Login() {
             <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-6 shadow-glow-amber-sm">
               <Shield className="w-6 h-6 text-accent" />
             </div>
-            <h1 className="text-display-lg font-serif text-foreground leading-[1.05]">
+            <h1 className="text-display-lg font-sans text-foreground leading-[1.05]">
               Support<br />OID
             </h1>
           </motion.div>
@@ -92,7 +92,7 @@ export default function Login() {
               { value: '24/7', label: 'Uptime' },
             ].map((stat) => (
               <div key={stat.label} className="space-y-1">
-                <div className="text-heading font-serif text-foreground tabular-nums">{stat.value}</div>
+                <div className="text-heading font-sans text-foreground tabular-nums">{stat.value}</div>
                 <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">{stat.label}</div>
               </div>
             ))}
@@ -122,7 +122,7 @@ export default function Login() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...springConfig, delay: 0.1 }}
             >
-              <h2 className="text-title font-serif text-foreground">Sign in</h2>
+              <h2 className="text-title font-sans text-foreground">Sign in</h2>
               <p className="text-sm text-muted-foreground mt-1.5">
                 Enter your credentials to continue
               </p>

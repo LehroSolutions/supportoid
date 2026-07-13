@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "slug": "contributing",
+  "title": "Contributing",
+  "status": "current",
+  "audience": [
+    "Contributors",
+    "Maintainers"
+  ],
+  "useWhen": "Use the corresponding current guide for this task.",
+  "sourceOfTruth": "current/contributing.md",
+  "counterparts": {
+    "markdown": "current/contributing.md",
+    "html": "current/contributing.html",
+    "json": "current/contributing.json"
+  },
+  "summary": "Current contributing guidance for SupportOID.",
+  "sections": [
+    {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
+      "id": "on-this-page",
+      "label": "On this page"
+    },
+    {
+      "id": "guidance",
+      "label": "Guidance"
+    },
+    {
+      "id": "verification",
+      "label": "Verification"
+    },
+    {
+      "id": "related-guides",
+      "label": "Related guides"
+    },
+    {
+      "id": "change-workflow",
+      "label": "Change workflow"
+    },
+    {
+      "id": "documentation-workflow",
+      "label": "Documentation workflow"
+    }
+  ],
+  "relatedGuides": [
+    "start-here",
+    "architecture",
+    "quality"
+  ],
+  "keywords": [
+    "supportoid",
+    "contributing",
+    "documentation",
+    "current"
+  ],
+  "lastReviewed": "2026-07-13",
+  "sourceChecksum": "915953cb36b6cf741931e15b02d7ed5e17adefb27358c4da7ed88a06a768d9d9",
+  "generatedAt": "2026-07-13T11:47:55.603410+00:00",
+  "release": "archive-2026-07-13",
+  "validation": {
+    "state": "generated"
+  }
+}

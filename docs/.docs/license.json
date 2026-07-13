@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "License",
+  "group": "Guides",
+  "path": ".docs/license.md",
+  "lead": "This repository is licensed under the Apache License, Version 2.0.",
+  "content_markdown": "# SupportOID License\n\nThis repository is licensed under the **Apache License, Version 2.0**.\n\n- SPDX: `Apache-2.0`\n- Copyright 2026 Lehro Solutions\n- Canonical legal text: repository root [`LICENSE`](../../LICENSE)\n- NOTICE: repository root [`NOTICE`](../../NOTICE)\n\n## Why Apache-2.0\n- Explicit patent grant\n- Clear contribution terms\n- Compatible with commercial adoption while remaining open source\n\n## Related\n- [ADR-0002](./adr-0002-apache-2-0.md)\n- [Index](./index.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

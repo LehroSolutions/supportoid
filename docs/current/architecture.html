@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SupportOID · Architecture</title><link rel="stylesheet" href="../assets/docs.css"></head><body><header class="top"><div class="top-inner brand"><div><a href="../index.html"><strong>SupportOID documentation</strong></a><p>A self-hosted customer-support application with agent workflows, analytics, traces, and operations controls.</p></div><span>Current · 2026-07-13</span></div></header><div class="shell"><nav class="nav" aria-label="Documentation guides"><a href="../index.html">Documentation Home</a><a href="start-here.html" >Start Here</a><a href="foundations.html" >Foundations</a><a href="design-system.html" >Design System</a><a href="patterns.html" >Patterns</a><a href="architecture.html" aria-current="page">Architecture</a><a href="operations.html" >Operations</a><a href="security.html" >Security</a><a href="quality.html" >Quality</a><a href="contributing.html" >Contributing</a><a href="roadmap.html" >Roadmap</a><a href="adr-0004-documentation-contract.html" >Adr 0004 Documentation Contract</a><a href="evidence-log.html" >Evidence Log</a></nav><main><article class="card"><div class="meta"><span>Status: current</span><span>Last reviewed: 2026-07-13</span><span>Audience: Support operators, Administrators, Backend and frontend contributors</span></div><nav aria-label="On this page"><strong>On this page</strong><ol><li><a href="#purpose">Purpose</a></li><li><a href="#on-this-page">On this page</a></li><li><a href="#guidance">Guidance</a></li><li><a href="#verification">Verification</a></li><li><a href="#related-guides">Related guides</a></li><li><a href="#system-map">System map</a></li><li><a href="#ownership-boundaries">Ownership boundaries</a></li><li><a href="#safe-change-sequence">Safe change sequence</a></li></ol></nav><h1 id="top">Architecture</h1>
+<p><strong>Counterparts:</strong> <a href="architecture.html"><code>architecture.html</code></a> · <a href="architecture.json">`architecture.json`</a></p>
+<ul><li>**Section:** Architecture</li></ul>
+<ul><li>**Audience:** Developers, maintainers, and security reviewers</li></ul>
+<ul><li>**Use when:** Changing system boundaries, data flow, integrations, or runtime behavior.</li></ul>
+<ul><li>**Status:** Current</li></ul>
+<ul><li>**Last reviewed:** 2026-07-13</li></ul>
+<h2 id="purpose">Purpose</h2>
+<p>Name the major responsibilities and safe change boundaries for the current release snapshot.</p>
+<h2 id="on-this-page">On this page</h2>
+<ul><li>[System map](#system-map)</li></ul>
+<ul><li>[Ownership boundaries](#ownership-boundaries)</li></ul>
+<ul><li>[Safe change sequence](#safe-change-sequence)</li></ul>
+<ul><li>[Verification](#verification)</li></ul>
+<h2 id="system-map">System map</h2>
+<pre><code>
+React operator UI and CLI → versioned Python API → agent orchestration, storage, traces, analytics, and optional adapter bridge
+</code></pre>
+<h2 id="ownership-boundaries">Ownership boundaries</h2>
+<ul><li>**Entry point:** `src/app/service.py`</li></ul>
+<ul><li>**Runtime and build context:** Python API and React/TypeScript operator frontend</li></ul>
+<ul><li>**Public documentation source of truth:** `docs/current/*.md`</li></ul>
+<ul><li>**Generated reader and agent counterparts:** `docs/current/*.html` and `docs/current/*.json`</li></ul>
+<h2 id="safe-change-sequence">Safe change sequence</h2>
+<p>1. Identify the owning layer and its existing verification.</p>
+<p>2. Change the source boundary before changing generated documentation.</p>
+<p>3. Update the affected workflow, security, and quality guides.</p>
+<p>4. Run product checks and <code>pnpm docs:check</code>.</p>
+<h2 id="verification">Verification</h2>
+<ul><li>Confirm the changed boundary is reflected in this guide and the related workflow.</li></ul>
+<ul><li>Ensure no current guide makes a claim that source or evidence cannot support.</li></ul>
+<h2 id="related-guides">Related guides</h2>
+<ul><li>[Operations](operations.md)</li></ul>
+<ul><li>[Security](security.md)</li></ul>
+<ul><li>[ADR: documentation contract](adr-0004-documentation-contract.md)</li></ul></article></main></div><footer class="footer">Source: <a href="architecture.md">Markdown</a> · Machine metadata: <a href="architecture.json">JSON</a> · <a href="../docs-map.json">Documentation map</a></footer></body></html>

@@ -42,7 +42,7 @@ export default function Navigation() {
                 <span className="text-accent-foreground font-bold text-sm">S</span>
               </motion.div>
               <div>
-                <h1 className="font-serif text-heading leading-tight text-foreground">SupportOID</h1>
+                <h1 className="font-sans text-heading leading-tight text-foreground">SupportOID</h1>
                 <p className="text-[11px] text-muted-foreground tracking-wide uppercase">
                   {user.username}
                 </p>

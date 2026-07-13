@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "How To Use",
+  "group": "Guides",
+  "path": ".docs/how-to-use.md",
+  "lead": "Self-hosted support stack: FastAPI backend + React operator UI + CLI.",
+  "content_markdown": "# How to Use SupportOID\n\nSelf-hosted support stack: FastAPI backend + React operator UI + CLI.\n\n## 1) Backend install\n\n```bash\npython -m venv .venv\nsource .venv/bin/activate\npip install -r requirements.txt\npip install -r requirements-dev.txt\n```\n\n## 2) Bootstrap admin (required)\n\n```bash\npython -m src.cli bootstrap-admin --username admin --password 'change-this-password'\n```\n\nOptional demo knowledge:\n\n```bash\npython -m src.cli seed-demo\n```\n\n## 3) Start API\n\n```bash\npython -m src.cli serve\n```\n\nOpen http://localhost:8001\n\n## 4) Frontend (optional)\n\n```bash\nbun install\nbun run dev:web\n```\n\n## 5) Operator workflows\n- Login with bootstrap admin\n- Use chat for support replies\n- Inspect traces/analytics/KB quality\n- Use CLI for diagnostics and automation\n\n## 6) Production checklist\n- Strong admin password\n- No committed `.env`\n- HTTPS reverse proxy\n- Non-test profile with bcrypt hashing\n\n## Related\n- [Getting Started](../getting-started.md)\n- [INSTALL.md](../../INSTALL.md)\n- [Security](../../SECURITY.md)\n- [API](../api.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}

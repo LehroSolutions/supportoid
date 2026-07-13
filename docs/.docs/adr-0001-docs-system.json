@@ -1,0 +1,14 @@
+{
+  "product": "SupportOID",
+  "title": "Adr 0001 Docs System",
+  "group": "ADRs",
+  "path": ".docs/adr-0001-docs-system.md",
+  "lead": "Accepted \u2014 2026-07-10",
+  "content_markdown": "# ADR-0001: Ultra-linked documentation system\n\n## Status\nAccepted \u2014 2026-07-10\n\n## Context\nOperator and agent workflows need durable, discoverable product knowledge that survives chat resets.\n\n## Decision\nMaintain a `docs/.docs` hub where every core page exists as **Markdown + HTML + JSON** twins with reciprocal links.\n\n## Consequences\n- Slightly higher doc maintenance cost\n- Much better agent/human navigability\n- HTML provides offline browsing without a static site pipeline\n\n## Related\n- [Index](./index.md)\n- [Skills](./skills.md)\n",
+  "layout": "quantumide-ultra-link",
+  "theme": {
+    "mode": "dark",
+    "accent": "#e8b14a",
+    "css": "design-system.css"
+  }
+}
