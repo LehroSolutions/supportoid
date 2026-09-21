@@ -8,9 +8,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "package:manager": "bun --version",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{json,md,yml,yaml}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"*.{json,md,yml,yaml}\""
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"*.{json,md,yml,yaml}\"",
+    "verify": "bun run format:check && bun run lint && bun run build"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.8.0",
