@@ -50,7 +50,12 @@ errors — never suppress them with `eslint-disable`, they are real render bugs.
 - Backend: bootstrap-first auth — no public default credentials, ever.
 - Sessions/traces are pruned deliberately (`round9` regression tests cover
   pruning on young runners) — preserve those behaviors.
-- Frontend: TypeScript strict (`tsc` runs in `build`); prettier enforced.
+- Frontend: TypeScript strict (`tsc` runs in `build`); prettier enforced;
+  ESLint (flat config) is part of `lint`/`verify` — never silence a rule to
+  land a change, fix the cause or add a scoped, justified disable.
+- **Single lockfile:** Bun workspaces resolve to the root `bun.lock`. Install
+  from the repo root; never create or commit a nested `frontend/bun.lock` — a
+  stale one made CI installs ambiguous and has been removed deliberately.
 
 ## Human-in-the-Loop Checkpoints
 
