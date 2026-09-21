@@ -19,6 +19,7 @@ Root is a Bun workspace (frontend + convex-adapter); Python uses venv/pip.
 | Install JS workspaces | `bun install` |
 | Frontend dev / build | `bun run dev:web` / `bun run build:web` |
 | Frontend format check | `bun run format:check` |
+| Frontend lint | `bun run lint` (ESLint flat config + react-hooks) |
 | Build everything JS | `bun run build:js` |
 | Backend setup | `python -m venv .venv && .venv/Scripts/pip install -e .` (or repo INSTALL.md) |
 | Backend tests | `python -m pytest -q` |
@@ -26,16 +27,20 @@ Root is a Bun workspace (frontend + convex-adapter); Python uses venv/pip.
 
 ## Verify Contract
 
-`bun run verify` = frontend format:check + full JS build (`build:js`
+`bun run verify` = frontend format:check + eslint + full JS build (`build:js`
 includes frontend `tsc`) + backend pytest. Must pass before you report
 success. If the venv is missing, create it per INSTALL.md — do not skip
 backend tests silently.
+
+Frontend lint runs ESLint 10 with `typescript-eslint` and
+`eslint-plugin-react-hooks`. `react-hooks/rules-of-hooks` violations are hard
+errors — never suppress them with `eslint-disable`, they are real render bugs.
 
 ## Codebase Map
 
 - `src/orchestrator.py` (+ `src/`) — FastAPI backend, agent API, sessions
 - `tests/` — pytest suite (rounds-based regression files)
-- `frontend/` — React operator UI (vite, prettier; no eslint yet — flagged gap)
+- `frontend/` — React operator UI (vite, prettier, eslint flat config)
 - `convex-adapter/` — Convex-style adapter bridge (Bun workspace)
 - `deploy/` — Docker/deployment assets; `data/` — sanitized seed data only
 - `pytest.ini` — pytest configuration

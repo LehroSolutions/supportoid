@@ -46,6 +46,7 @@ src/traces/*.json
 # Local test scratch
 data/.pytest-*/
 data/pytest-cache-files-*/
+verify*.txt
 
 # OS / editors
 .DS_Store

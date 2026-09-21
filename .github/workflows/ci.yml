@@ -31,6 +31,7 @@ jobs:
           node-version: '24.x'
       - run: bun install
       - run: bun run format:check
+      - run: bun run lint
       - run: bun run build
 
   adapter:
