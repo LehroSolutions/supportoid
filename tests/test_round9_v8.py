@@ -15,6 +15,7 @@ import json
 import os
 import sys
 import math
+from datetime import datetime, timezone
 
 # ── Fixtures ──
 
@@ -81,22 +82,24 @@ def tmp_feedback_dir(tmp_path):
     fb_dir = tmp_path / "feedback"
     fb_dir.mkdir()
     # Write sample feedback
-    today = "2026-04-04"
+    # Use today's date so entries always fall inside load_feedback_entries' rolling
+    # 30-day window (a hardcoded date goes stale and silently empties the results).
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     entries = [
-        {"id": "fb_0", "timestamp": "2026-04-04T10:00:00", "message_preview": "How do I reset password?",
+        {"id": "fb_0", "timestamp": f"{today}T10:00:00", "message_preview": "How do I reset password?",
          "predicted_intent": "account_management", "confidence": 0.94, "sentiment": 0,
          "response": "Go to login and click Forgot Password.", "response_source": "knowledge",
          "quality_score": 0.9, "user_rating": 5, "auto_action": "none"},
-        {"id": "fb_1", "timestamp": "2026-04-04T11:00:00", "message_preview": "I want refund pls",
+        {"id": "fb_1", "timestamp": f"{today}T11:00:00", "message_preview": "I want refund pls",
          "predicted_intent": "refund_request", "confidence": 0.89, "sentiment": -0.3,
          "response": "30-day guarantee applies.", "response_source": "knowledge",
          "quality_score": 0.6, "user_rating": 2, "corrected_intent": "refund_request",
          "auto_action": "add_to_training"},
-        {"id": "fb_2", "timestamp": "2026-04-04T12:00:00", "message_preview": "refund my money now",
+        {"id": "fb_2", "timestamp": f"{today}T12:00:00", "message_preview": "refund my money now",
          "predicted_intent": "refund_request", "confidence": 0.72, "sentiment": -0.7,
          "response": "Contact support.", "response_source": "llm",
          "quality_score": 0.3, "user_rating": 1, "auto_action": "flag_for_review"},
-        {"id": "fb_3", "timestamp": "2026-04-04T13:00:00", "message_preview": "Need refund for order",
+        {"id": "fb_3", "timestamp": f"{today}T13:00:00", "message_preview": "Need refund for order",
          "predicted_intent": "refund_request", "confidence": 0.85, "sentiment": -0.2,
          "response": "See refund policy.", "response_source": "knowledge",
          "quality_score": 0.5, "user_rating": 2, "auto_action": "needs_improvement"},

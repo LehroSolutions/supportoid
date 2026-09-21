@@ -183,6 +183,7 @@ class Orchestrator:
             "quality_score": quality.overall,
             "should_escalate": should_escalate,
             "escalation_reason": escalation_reason,
+            "escalation_role": getattr(escalation, "human_role", None) if should_escalate else None,
             "source": response.source,
             "kb_results_used": len(kb_results),
             "suggested_actions": response.suggested_actions,

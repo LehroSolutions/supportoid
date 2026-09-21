@@ -29,9 +29,8 @@ _write_probe/
 _probe_cli*/
 
 # Node / frontend artifacts
-frontend/node_modules/
+node_modules/
 frontend/dist/
-convex-adapter/node_modules/
 convex-adapter/dist/
 
 # Runtime data
