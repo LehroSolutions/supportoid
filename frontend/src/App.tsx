@@ -1,19 +1,19 @@
-import { lazy, Suspense } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
-import { useAuth } from './hooks/useAuth'
-import Layout from './components/shared/Layout'
-import ErrorBoundary from './components/shared/ErrorBoundary'
-import { Skeleton } from './components/shared/Skeleton'
+import { lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { useAuth } from './hooks/useAuth';
+import Layout from './components/shared/Layout';
+import ErrorBoundary from './components/shared/ErrorBoundary';
+import { Skeleton } from './components/shared/Skeleton';
 
-const Login = lazy(() => import('./pages/Login'))
-const Dashboard = lazy(() => import('./pages/Dashboard'))
-const Chat = lazy(() => import('./pages/Chat'))
-const Traces = lazy(() => import('./pages/Traces'))
-const Analytics = lazy(() => import('./pages/Analytics'))
-const KBQuality = lazy(() => import('./pages/KBQuality'))
-const Ops = lazy(() => import('./pages/Ops'))
-const NotFound = lazy(() => import('./pages/NotFound'))
+const Login = lazy(() => import('./pages/Login'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Chat = lazy(() => import('./pages/Chat'));
+const Traces = lazy(() => import('./pages/Traces'));
+const Analytics = lazy(() => import('./pages/Analytics'));
+const KBQuality = lazy(() => import('./pages/KBQuality'));
+const Ops = lazy(() => import('./pages/Ops'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function PageSuspense() {
   return (
@@ -24,11 +24,11 @@ function PageSuspense() {
         <Skeleton variant="line" className="h-4 w-2/3" />
       </div>
     </div>
-  )
+  );
 }
 
 function App() {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading } = useAuth();
 
   if (isLoading) {
     return (
@@ -38,7 +38,7 @@ function App() {
           <span className="text-xs text-muted-foreground font-mono">loading</span>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -47,11 +47,15 @@ function App() {
         <Routes>
           <Route
             path="/login"
-            element={user ? <Navigate to="/dashboard" replace /> : (
-              <Suspense fallback={<PageSuspense />}>
-                <Login />
-              </Suspense>
-            )}
+            element={
+              user ? (
+                <Navigate to="/dashboard" replace />
+              ) : (
+                <Suspense fallback={<PageSuspense />}>
+                  <Login />
+                </Suspense>
+              )
+            }
           />
           <Route
             path="/*"
@@ -81,7 +85,7 @@ function App() {
         </Routes>
       </AnimatePresence>
     </ErrorBoundary>
-  )
+  );
 }
 
-export default App
+export default App;

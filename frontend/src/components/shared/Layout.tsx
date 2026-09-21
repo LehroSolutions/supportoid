@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
-import Navigation from './Navigation'
+import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
+import Navigation from './Navigation';
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
@@ -20,5 +20,5 @@ export default function Layout({ children }: LayoutProps) {
         {children}
       </motion.main>
     </div>
-  )
+  );
 }

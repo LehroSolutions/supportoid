@@ -2,7 +2,6 @@
 
 Bun-first JavaScript/TypeScript package.
 
-
 ## Package manager (Bun)
 
 This package is **Bun-first**.

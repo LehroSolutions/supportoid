@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useQuery } from '@tanstack/react-query'
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useQuery } from '@tanstack/react-query';
 import {
   Activity,
   AlertTriangle,
@@ -10,34 +10,34 @@ import {
   FileText,
   Search,
   XCircle,
-} from 'lucide-react'
+} from 'lucide-react';
 
-import AnimatedCard from '../components/shared/AnimatedCard'
-import { TableSkeleton } from '../components/shared/Skeleton'
-import { api } from '../lib/api'
-import { cn, containerVariants } from '../lib/utils'
-import type { PaginatedResponse, TraceSummary } from '../types'
+import AnimatedCard from '../components/shared/AnimatedCard';
+import { TableSkeleton } from '../components/shared/Skeleton';
+import { api } from '../lib/api';
+import { cn, containerVariants } from '../lib/utils';
+import type { PaginatedResponse, TraceSummary } from '../types';
 
 export default function Traces() {
   const { data: tracePage, isLoading } = useQuery<PaginatedResponse<TraceSummary>>({
     queryKey: ['traces'],
     queryFn: () => api.traces.list(100, 0),
-  })
-  const [search, setSearch] = useState('')
-  const [expanded, setExpanded] = useState<string | null>(null)
+  });
+  const [search, setSearch] = useState('');
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
-    const traces = tracePage?.items ?? []
-    if (!search) return traces
-    const q = search.toLowerCase()
+    const traces = tracePage?.items ?? [];
+    if (!search) return traces;
+    const q = search.toLowerCase();
     return traces.filter(
       (trace) =>
         trace.session_id.toLowerCase().includes(q) ||
         trace.summary.toLowerCase().includes(q) ||
         (trace.error && trace.error.toLowerCase().includes(q)) ||
-        (trace.user_input && trace.user_input.toLowerCase().includes(q))
-    )
-  }, [tracePage, search])
+        (trace.user_input && trace.user_input.toLowerCase().includes(q)),
+    );
+  }, [tracePage, search]);
 
   if (isLoading) {
     return (
@@ -48,20 +48,13 @@ export default function Traces() {
         </div>
         <TableSkeleton rows={6} />
       </div>
-    )
+    );
   }
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-      className="space-y-6"
-    >
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-6">
       <div className="mb-2">
-        <h2 className="text-display-sm font-sans text-foreground tracking-tight">
-          Traces
-        </h2>
+        <h2 className="text-display-sm font-sans text-foreground tracking-tight">Traces</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Session trace records from the canonical store.
         </p>
@@ -121,7 +114,7 @@ export default function Traces() {
             </thead>
             <tbody>
               {filtered.map((trace, index) => {
-                const isExpanded = expanded === trace.session_id
+                const isExpanded = expanded === trace.session_id;
                 return (
                   <motion.tr
                     key={trace.session_id}
@@ -166,13 +159,9 @@ export default function Traces() {
                     </td>
                     <td className="px-1 py-2.5">
                       <button
-                        onClick={() =>
-                          setExpanded(isExpanded ? null : trace.session_id)
-                        }
+                        onClick={() => setExpanded(isExpanded ? null : trace.session_id)}
                         className="focus-ring rounded p-1 transition-colors hover:bg-muted/50"
-                        aria-label={
-                          isExpanded ? 'Collapse trace' : 'Expand trace'
-                        }
+                        aria-label={isExpanded ? 'Collapse trace' : 'Expand trace'}
                       >
                         <motion.div
                           animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -183,15 +172,13 @@ export default function Traces() {
                       </button>
                     </td>
                   </motion.tr>
-                )
+                );
               })}
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={6} className="py-12 text-center text-muted-foreground">
                     <FileText className="mx-auto mb-2 h-8 w-8 opacity-40" />
-                    <p className="text-sm">
-                      {search ? 'No matching traces' : 'No traces found'}
-                    </p>
+                    <p className="text-sm">{search ? 'No matching traces' : 'No traces found'}</p>
                   </td>
                 </tr>
               )}
@@ -202,8 +189,8 @@ export default function Traces() {
         <AnimatePresence>
           {expanded &&
             (() => {
-              const trace = filtered.find((item) => item.session_id === expanded)
-              if (!trace) return null
+              const trace = filtered.find((item) => item.session_id === expanded);
+              if (!trace) return null;
               return (
                 <motion.div
                   key={expanded}
@@ -218,17 +205,13 @@ export default function Traces() {
                       <span className="font-mono uppercase tracking-wider text-muted-foreground">
                         Session ID
                       </span>
-                      <p className="mt-1 font-mono text-foreground">
-                        {trace.session_id}
-                      </p>
+                      <p className="mt-1 font-mono text-foreground">{trace.session_id}</p>
                     </div>
                     <div>
                       <span className="font-mono uppercase tracking-wider text-muted-foreground">
                         User Input
                       </span>
-                      <p className="mt-1 truncate text-foreground">
-                        {trace.user_input || '-'}
-                      </p>
+                      <p className="mt-1 truncate text-foreground">{trace.user_input || '-'}</p>
                     </div>
                     <div>
                       <span className="font-mono uppercase tracking-wider text-muted-foreground">
@@ -237,9 +220,7 @@ export default function Traces() {
                       <p
                         className={cn(
                           'mt-1',
-                          trace.error
-                            ? 'text-destructive'
-                            : 'text-muted-foreground'
+                          trace.error ? 'text-destructive' : 'text-muted-foreground',
                         )}
                       >
                         {trace.error || 'None'}
@@ -249,16 +230,14 @@ export default function Traces() {
                       <span className="font-mono uppercase tracking-wider text-muted-foreground">
                         Summary
                       </span>
-                      <p className="mt-1 text-foreground">
-                        {trace.summary || '-'}
-                      </p>
+                      <p className="mt-1 text-foreground">{trace.summary || '-'}</p>
                     </div>
                   </div>
                 </motion.div>
-              )
+              );
             })()}
         </AnimatePresence>
       </AnimatedCard>
     </motion.div>
-  )
+  );
 }

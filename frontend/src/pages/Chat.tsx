@@ -1,52 +1,52 @@
-import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useMutation } from '@tanstack/react-query'
-import { api } from '../lib/api'
-import { springConfig, cn, formatDuration } from '../lib/utils'
-import { Bot, User, AlertCircle, ArrowUp, CircleDot } from 'lucide-react'
-import type { ChatResponse } from '../types'
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useMutation } from '@tanstack/react-query';
+import { api } from '../lib/api';
+import { springConfig, cn, formatDuration } from '../lib/utils';
+import { Bot, User, AlertCircle, ArrowUp, CircleDot } from 'lucide-react';
+import type { ChatResponse } from '../types';
 
 export default function Chat() {
-  const [message, setMessage] = useState('')
-  const [conversationId, setConversationId] = useState('')
-  const [result, setResult] = useState<ChatResponse | null>(null)
-  const [history, setHistory] = useState<{ role: 'user' | 'assistant'; content: string }[]>([])
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const [message, setMessage] = useState('');
+  const [conversationId, setConversationId] = useState('');
+  const [result, setResult] = useState<ChatResponse | null>(null);
+  const [history, setHistory] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = useMutation({
     mutationFn: api.chat.send,
     onSuccess: (data) => {
-      setResult(data)
-      setHistory(prev => [
+      setResult(data);
+      setHistory((prev) => [
         ...prev,
         { role: 'user', content: message },
         { role: 'assistant', content: data.response },
-      ])
-      setMessage('')
+      ]);
+      setMessage('');
     },
-  })
+  });
 
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [history])
+  }, [history]);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!message.trim() || chatMutation.isPending) return
+    e.preventDefault();
+    if (!message.trim() || chatMutation.isPending) return;
     chatMutation.mutate({
       message: message.trim(),
       conversation_id: conversationId || undefined,
-    })
-  }
+    });
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSubmit(e)
+      e.preventDefault();
+      handleSubmit(e);
     }
-  }
+  };
 
   return (
     <motion.div
@@ -56,7 +56,9 @@ export default function Chat() {
     >
       <div className="mb-1">
         <h2 className="text-display-sm font-sans text-foreground tracking-tight">Chat</h2>
-        <p className="text-sm text-muted-foreground mt-1">Interact with the multi-agent orchestration system.</p>
+        <p className="text-sm text-muted-foreground mt-1">
+          Interact with the multi-agent orchestration system.
+        </p>
       </div>
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 min-h-0 pr-1">
@@ -71,7 +73,9 @@ export default function Chat() {
             </div>
             <div>
               <p className="text-heading font-sans text-foreground">Start a conversation</p>
-              <p className="text-sm text-muted-foreground mt-1">Send a message to begin interacting with SupportOID</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Send a message to begin interacting with SupportOID
+              </p>
             </div>
           </motion.div>
         )}
@@ -83,20 +87,30 @@ export default function Chat() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...springConfig, delay: i * 0.04 }}
-              className={cn("flex gap-3", msg.role === 'user' && 'flex-row-reverse')}
+              className={cn('flex gap-3', msg.role === 'user' && 'flex-row-reverse')}
             >
-              <div className={cn(
-                "w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0",
-                msg.role === 'user' ? "bg-accent/15 text-accent" : "bg-muted/60 text-muted-foreground"
-              )}>
-                {msg.role === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
+              <div
+                className={cn(
+                  'w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0',
+                  msg.role === 'user'
+                    ? 'bg-accent/15 text-accent'
+                    : 'bg-muted/60 text-muted-foreground',
+                )}
+              >
+                {msg.role === 'user' ? (
+                  <User className="w-3.5 h-3.5" />
+                ) : (
+                  <Bot className="w-3.5 h-3.5" />
+                )}
               </div>
-              <div className={cn(
-                "max-w-[75%] px-4 py-2.5 rounded-xl text-sm whitespace-pre-wrap",
-                msg.role === 'user'
-                  ? "bg-accent/10 text-foreground rounded-tr-sm"
-                  : "bg-card liquid-glass-dark rounded-tl-sm"
-              )}>
+              <div
+                className={cn(
+                  'max-w-[75%] px-4 py-2.5 rounded-xl text-sm whitespace-pre-wrap',
+                  msg.role === 'user'
+                    ? 'bg-accent/10 text-foreground rounded-tr-sm'
+                    : 'bg-card liquid-glass-dark rounded-tl-sm',
+                )}
+              >
                 {msg.content}
               </div>
             </motion.div>
@@ -181,10 +195,10 @@ export default function Chat() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={cn(
-              "absolute bottom-3 right-3 p-2 rounded-lg transition-colors btn-tactile",
+              'absolute bottom-3 right-3 p-2 rounded-lg transition-colors btn-tactile',
               message.trim() && !chatMutation.isPending
-                ? "bg-accent text-accent-foreground shadow-glow-amber-sm"
-                : "bg-muted text-muted-foreground"
+                ? 'bg-accent text-accent-foreground shadow-glow-amber-sm'
+                : 'bg-muted text-muted-foreground',
             )}
             aria-label="Send message"
           >
@@ -201,17 +215,19 @@ export default function Chat() {
         )}
       </div>
     </motion.div>
-  )
+  );
 }
 
 function Pill({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <span className={cn(
-      "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono tracking-wide",
-      accent ? "bg-accent/10 text-accent" : "bg-muted/40 text-muted-foreground"
-    )}>
+    <span
+      className={cn(
+        'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono tracking-wide',
+        accent ? 'bg-accent/10 text-accent' : 'bg-muted/40 text-muted-foreground',
+      )}
+    >
       <span className="opacity-60">{label}</span>
       <span className="font-semibold">{value}</span>
     </span>
-  )
+  );
 }

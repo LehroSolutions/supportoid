@@ -1,45 +1,45 @@
-import { useState } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { useAuth } from '../hooks/useAuth'
-import { cn, springConfig, easing } from '../lib/utils'
-import { Shield, AlertCircle, ArrowRight } from 'lucide-react'
+import { useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useAuth } from '../hooks/useAuth';
+import { cn, springConfig, easing } from '../lib/utils';
+import { Shield, AlertCircle, ArrowRight } from 'lucide-react';
 
 export default function Login() {
-  const { login } = useAuth()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [shake, setShake] = useState(false)
+  const { login } = useAuth();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [shake, setShake] = useState(false);
 
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 })
-  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 })
-  const bgX = useTransform(springX, [0, 1], [0, 15])
-  const bgY = useTransform(springY, [0, 1], [0, 15])
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const bgX = useTransform(springX, [0, 1], [0, 15]);
+  const bgY = useTransform(springY, [0, 1], [0, 15]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    mouseX.set((e.clientX - rect.left) / rect.width)
-    mouseY.set((e.clientY - rect.top) / rect.height)
-  }
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width);
+    mouseY.set((e.clientY - rect.top) / rect.height);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError('')
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
 
-    const success = await login(username, password)
+    const success = await login(username, password);
 
     if (!success) {
-      setError('Invalid credentials')
-      setShake(true)
-      setTimeout(() => setShake(false), 500)
+      setError('Invalid credentials');
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
     }
 
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
     <div
@@ -67,7 +67,9 @@ export default function Login() {
               <Shield className="w-6 h-6 text-accent" />
             </div>
             <h1 className="text-display-lg font-sans text-foreground leading-[1.05]">
-              Support<br />OID
+              Support
+              <br />
+              OID
             </h1>
           </motion.div>
 
@@ -92,8 +94,12 @@ export default function Login() {
               { value: '24/7', label: 'Uptime' },
             ].map((stat) => (
               <div key={stat.label} className="space-y-1">
-                <div className="text-heading font-sans text-foreground tabular-nums">{stat.value}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">{stat.label}</div>
+                <div className="text-heading font-sans text-foreground tabular-nums">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </motion.div>
@@ -113,7 +119,7 @@ export default function Login() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={springConfig}
-          className={cn("w-full max-w-sm", shake && "animate-shake")}
+          className={cn('w-full max-w-sm', shake && 'animate-shake')}
         >
           <div className="liquid-glass-dark-elevated rounded-2xl p-8">
             <motion.div
@@ -145,7 +151,10 @@ export default function Login() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ ...springConfig, delay: 0.15 }}
               >
-                <label htmlFor="username" className="block text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                <label
+                  htmlFor="username"
+                  className="block text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider mb-2"
+                >
                   Username
                 </label>
                 <input
@@ -165,7 +174,10 @@ export default function Login() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ ...springConfig, delay: 0.25 }}
               >
-                <label htmlFor="password" className="block text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider mb-2"
+                >
                   Password
                 </label>
                 <input
@@ -217,5 +229,5 @@ export default function Login() {
         .animate-shake { animation: shake 0.4s ease-in-out; }
       `}</style>
     </div>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import { AlertTriangle } from 'lucide-react'
-import MagneticButton from '../components/shared/MagneticButton'
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { AlertTriangle } from 'lucide-react';
+import MagneticButton from '../components/shared/MagneticButton';
 
 export default function NotFound() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -26,5 +26,5 @@ export default function NotFound() {
         Go to Dashboard
       </MagneticButton>
     </motion.div>
-  )
+  );
 }

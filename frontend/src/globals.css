@@ -39,14 +39,18 @@
     @apply border-border;
   }
   html {
-    font-family: "Geist", system-ui, -apple-system, sans-serif;
+    font-family:
+      'Geist',
+      system-ui,
+      -apple-system,
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 }
 
@@ -55,14 +59,18 @@
     @apply backdrop-blur-xl;
     background: oklch(0.15 0.01 0.11 / 0.75);
     border: 1px solid oklch(1 0 0 / 0.06);
-    box-shadow: 0 8px 32px oklch(0 0 0 / 0.2), inset 0 1px 0 oklch(1 0 0 / 0.04);
+    box-shadow:
+      0 8px 32px oklch(0 0 0 / 0.2),
+      inset 0 1px 0 oklch(1 0 0 / 0.04);
   }
 
   .liquid-glass-dark-elevated {
     @apply backdrop-blur-xl;
     background: oklch(0.17 0.012 0.14 / 0.85);
     border: 1px solid oklch(1 0 0 / 0.08);
-    box-shadow: 0 12px 40px oklch(0 0 0 / 0.3), inset 0 1px 0 oklch(1 0 0 / 0.06);
+    box-shadow:
+      0 12px 40px oklch(0 0 0 / 0.3),
+      inset 0 1px 0 oklch(1 0 0 / 0.06);
   }
 
   .bento-grid {
@@ -93,7 +101,7 @@
   }
 
   .noise-overlay::after {
-    content: "";
+    content: '';
     position: fixed;
     inset: 0;
     z-index: 9999;
@@ -110,15 +118,10 @@
   }
 
   .skeleton::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      oklch(1 0 0 / 0.03) 50%,
-      transparent 100%
-    );
+    background: linear-gradient(90deg, transparent 0%, oklch(1 0 0 / 0.03) 50%, transparent 100%);
     background-size: 200% 100%;
     animation: shimmer 2s linear infinite;
   }
@@ -128,7 +131,9 @@
     transition: box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .focus-ring:focus-visible {
-    box-shadow: 0 0 0 2px oklch(var(--background)), 0 0 0 4px oklch(var(--ring));
+    box-shadow:
+      0 0 0 2px oklch(var(--background)),
+      0 0 0 4px oklch(var(--ring));
   }
 
   .btn-tactile {

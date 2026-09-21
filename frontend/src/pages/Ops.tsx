@@ -1,23 +1,36 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { api } from '../lib/api'
-import MagneticButton from '../components/shared/MagneticButton'
-import { CardSkeleton } from '../components/shared/Skeleton'
-import { containerVariants, springConfig, cn, formatPercent, formatNumber } from '../lib/utils'
-import { useAuth } from '../hooks/useAuth'
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { api } from '../lib/api';
+import MagneticButton from '../components/shared/MagneticButton';
+import { CardSkeleton } from '../components/shared/Skeleton';
+import { containerVariants, springConfig, cn, formatPercent, formatNumber } from '../lib/utils';
+import { useAuth } from '../hooks/useAuth';
 import {
-  Shield, Database, HardDrive, Users, Gauge, Trash2,
-  RefreshCw, Activity, Server, AlertTriangle, Clock,
-  Cpu, MemoryStick, Zap, Lock, Eye,
-} from 'lucide-react'
+  Shield,
+  Database,
+  HardDrive,
+  Users,
+  Gauge,
+  Trash2,
+  RefreshCw,
+  Activity,
+  Server,
+  AlertTriangle,
+  Clock,
+  Cpu,
+  MemoryStick,
+  Zap,
+  Lock,
+  Eye,
+} from 'lucide-react';
 import type {
   SecurityReport,
   CacheStats,
   MemoryStatus,
   RateLimitStatus,
   HealthCheck,
-} from '../types'
+} from '../types';
 
 function MetricTile({
   icon: Icon,
@@ -27,12 +40,12 @@ function MetricTile({
   accent,
   delay = 0,
 }: {
-  icon: React.ElementType
-  label: string
-  value: string | number
-  sub?: string
-  accent?: boolean
-  delay?: number
+  icon: React.ElementType;
+  label: string;
+  value: string | number;
+  sub?: string;
+  accent?: boolean;
+  delay?: number;
 }) {
   return (
     <motion.div
@@ -43,14 +56,21 @@ function MetricTile({
     >
       <div className="flex items-center gap-2">
         <Icon className={cn('w-3.5 h-3.5', accent ? 'text-accent' : 'text-muted-foreground')} />
-        <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">{label}</span>
+        <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+          {label}
+        </span>
       </div>
-      <div className={cn('text-2xl font-semibold tabular-nums tracking-tight', accent && 'text-accent')}>
+      <div
+        className={cn(
+          'text-2xl font-semibold tabular-nums tracking-tight',
+          accent && 'text-accent',
+        )}
+      >
         {value}
       </div>
       {sub && <span className="text-[11px] font-mono text-muted-foreground/70">{sub}</span>}
     </motion.div>
-  )
+  );
 }
 
 function ActionCard({
@@ -62,25 +82,25 @@ function ActionCard({
   successKey,
   delay = 0,
 }: {
-  title: string
-  description: string
-  icon: React.ElementType
-  mutationFn: () => Promise<Record<string, number>>
-  queryKeyToInvalidate: string
-  successKey: string
-  delay?: number
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  mutationFn: () => Promise<Record<string, number>>;
+  queryKeyToInvalidate: string;
+  successKey: string;
+  delay?: number;
 }) {
-  const qc = useQueryClient()
-  const [result, setResult] = useState<number | null>(null)
+  const qc = useQueryClient();
+  const [result, setResult] = useState<number | null>(null);
 
   const mutation = useMutation({
     mutationFn,
     onSuccess: (data) => {
-      setResult(data[successKey] ?? 0)
-      qc.invalidateQueries({ queryKey: [queryKeyToInvalidate] })
-      setTimeout(() => setResult(null), 3000)
+      setResult(data[successKey] ?? 0);
+      qc.invalidateQueries({ queryKey: [queryKeyToInvalidate] });
+      setTimeout(() => setResult(null), 3000);
     },
-  })
+  });
 
   return (
     <motion.div
@@ -90,7 +110,11 @@ function ActionCard({
       className="bento-card p-5 space-y-3"
     >
       <div className="flex items-center gap-2.5">
-        <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
+        <motion.div
+          whileHover={{ rotate: 180 }}
+          transition={{ duration: 0.4 }}
+          className="p-2 bg-accent/10 rounded-lg"
+        >
           <Icon className="w-4 h-4 text-accent" />
         </motion.div>
         <h3 className="text-sm font-sans text-foreground">{title}</h3>
@@ -124,56 +148,59 @@ function ActionCard({
         </AnimatePresence>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export default function Ops() {
-  const { isAdmin } = useAuth()
+  const { isAdmin } = useAuth();
 
   const { data: security, isLoading: secLoading } = useQuery<SecurityReport>({
     queryKey: ['admin', 'security'],
     queryFn: api.admin.security,
     enabled: isAdmin,
-  })
+  });
 
   const { data: cache, isLoading: cacheLoading } = useQuery<CacheStats>({
     queryKey: ['admin', 'cache'],
     queryFn: api.admin.cache,
     enabled: isAdmin,
-  })
+  });
 
   const { data: memory, isLoading: memLoading } = useQuery<MemoryStatus>({
     queryKey: ['admin', 'memory'],
     queryFn: api.admin.memory,
     enabled: isAdmin,
-  })
+  });
 
-  const { data: sessions, isLoading: sessLoading } = useQuery<{ active: number; sessions: Array<{ username: string; created_at: string }> }>({
+  const { data: sessions, isLoading: sessLoading } = useQuery<{
+    active: number;
+    sessions: Array<{ username: string; created_at: string }>;
+  }>({
     queryKey: ['admin', 'sessions'],
     queryFn: api.admin.sessions,
     enabled: isAdmin,
-  })
+  });
 
   const { data: rateLimit, isLoading: rlLoading } = useQuery<RateLimitStatus>({
     queryKey: ['admin', 'rateLimit'],
     queryFn: api.admin.rateLimit,
     enabled: isAdmin,
-  })
+  });
 
   const { data: tiers } = useQuery<Record<string, { rate_limit: number; features: string[] }>>({
     queryKey: ['admin', 'tier'],
     queryFn: api.admin.tier,
     enabled: isAdmin,
-  })
+  });
 
   const { data: health } = useQuery<HealthCheck>({
     queryKey: ['health'],
     queryFn: api.health,
     enabled: isAdmin,
     refetchInterval: 30000,
-  })
+  });
 
-  const isLoading = secLoading || cacheLoading || memLoading || sessLoading || rlLoading
+  const isLoading = secLoading || cacheLoading || memLoading || sessLoading || rlLoading;
 
   if (!isAdmin) {
     return (
@@ -181,7 +208,7 @@ export default function Ops() {
         <Lock className="w-8 h-8 text-muted-foreground" />
         <p className="text-sm text-muted-foreground font-mono">Admin access required</p>
       </div>
-    )
+    );
   }
 
   if (isLoading) {
@@ -189,25 +216,24 @@ export default function Ops() {
       <div className="space-y-6">
         <div className="skeleton h-7 w-48 rounded" />
         <div className="bento-grid">
-          {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
+          {Array.from({ length: 6 }).map((_, i) => (
+            <CardSkeleton key={i} />
+          ))}
         </div>
       </div>
-    )
+    );
   }
 
-  const uptimeHrs = health ? (health.uptime_seconds / 3600).toFixed(1) : '—'
-  const cacheHit = cache ? formatPercent(cache.hit_rate, 0) : '0%'
+  const uptimeHrs = health ? (health.uptime_seconds / 3600).toFixed(1) : '—';
+  const cacheHit = cache ? formatPercent(cache.hit_rate, 0) : '0%';
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-      className="space-y-6"
-    >
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-6">
       <motion.div variants={containerVariants} className="mb-2">
         <h2 className="text-display-sm font-sans text-foreground tracking-tight">Operations</h2>
-        <p className="text-sm text-muted-foreground mt-1">Infrastructure control plane — security, caching, memory, sessions.</p>
+        <p className="text-sm text-muted-foreground mt-1">
+          Infrastructure control plane — security, caching, memory, sessions.
+        </p>
       </motion.div>
 
       {/* Health bar */}
@@ -219,9 +245,21 @@ export default function Ops() {
           className="bento-card col-span-12 p-4 flex items-center gap-6 flex-wrap"
         >
           <div className="flex items-center gap-2">
-            <span className={cn('status-dot', health.status === 'healthy' ? 'status-dot-healthy' : 'status-dot-warning')} />
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Status</span>
-            <span className={cn('text-sm font-semibold', health.status === 'healthy' ? 'text-success' : 'text-warning')}>
+            <span
+              className={cn(
+                'status-dot',
+                health.status === 'healthy' ? 'status-dot-healthy' : 'status-dot-warning',
+              )}
+            />
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
+              Status
+            </span>
+            <span
+              className={cn(
+                'text-sm font-semibold',
+                health.status === 'healthy' ? 'text-success' : 'text-warning',
+              )}
+            >
               {health.status}
             </span>
           </div>
@@ -235,9 +273,15 @@ export default function Ops() {
           </div>
           {Object.entries(health.checks).map(([key, check]) => (
             <div key={key} className="flex items-center gap-1.5">
-              <span className={cn('status-dot', check.ok ? 'status-dot-healthy' : 'status-dot-warning')} />
+              <span
+                className={cn('status-dot', check.ok ? 'status-dot-healthy' : 'status-dot-warning')}
+              />
               <span className="text-[11px] font-mono text-muted-foreground">{key}</span>
-              {check.detail && <span className="text-[11px] font-mono text-muted-foreground/60">({check.detail})</span>}
+              {check.detail && (
+                <span className="text-[11px] font-mono text-muted-foreground/60">
+                  ({check.detail})
+                </span>
+              )}
             </div>
           ))}
         </motion.div>
@@ -252,17 +296,43 @@ export default function Ops() {
           className="bento-card col-span-12 lg:col-span-8 p-5 space-y-4"
         >
           <div className="flex items-center gap-2.5">
-            <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.4 }}
+              className="p-2 bg-accent/10 rounded-lg"
+            >
               <Shield className="w-4 h-4 text-accent" />
             </motion.div>
             <h3 className="text-sm font-sans text-foreground">Security</h3>
           </div>
           {security && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <MetricTile icon={AlertTriangle} label="Auth failures 24h" value={security.auth_failures_24h} accent={security.auth_failures_24h > 5} delay={0.15} />
-              <MetricTile icon={Lock} label="Rate limit hits" value={security.rate_limit_hits_24h} accent={security.rate_limit_hits_24h > 10} delay={0.18} />
-              <MetricTile icon={Users} label="Active sessions" value={security.active_sessions} delay={0.21} />
-              <MetricTile icon={Eye} label="Total sessions" value={security.total_sessions} delay={0.24} />
+              <MetricTile
+                icon={AlertTriangle}
+                label="Auth failures 24h"
+                value={security.auth_failures_24h}
+                accent={security.auth_failures_24h > 5}
+                delay={0.15}
+              />
+              <MetricTile
+                icon={Lock}
+                label="Rate limit hits"
+                value={security.rate_limit_hits_24h}
+                accent={security.rate_limit_hits_24h > 10}
+                delay={0.18}
+              />
+              <MetricTile
+                icon={Users}
+                label="Active sessions"
+                value={security.active_sessions}
+                delay={0.21}
+              />
+              <MetricTile
+                icon={Eye}
+                label="Total sessions"
+                value={security.total_sessions}
+                delay={0.24}
+              />
             </div>
           )}
           {security && security.suspicious_ips.length > 0 && (
@@ -273,7 +343,12 @@ export default function Ops() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {security.suspicious_ips.map((ip) => (
-                  <code key={ip} className="px-2 py-0.5 text-[11px] font-mono bg-warning/10 text-warning rounded">{ip}</code>
+                  <code
+                    key={ip}
+                    className="px-2 py-0.5 text-[11px] font-mono bg-warning/10 text-warning rounded"
+                  >
+                    {ip}
+                  </code>
                 ))}
               </div>
             </div>
@@ -288,7 +363,11 @@ export default function Ops() {
           className="bento-card col-span-12 lg:col-span-4 p-5 space-y-4"
         >
           <div className="flex items-center gap-2.5">
-            <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.4 }}
+              className="p-2 bg-accent/10 rounded-lg"
+            >
               <Gauge className="w-4 h-4 text-accent" />
             </motion.div>
             <h3 className="text-sm font-sans text-foreground">Rate Limiting</h3>
@@ -297,12 +376,20 @@ export default function Ops() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono text-muted-foreground">Global</span>
-                <span className={cn('text-xs font-mono', rateLimit.global_enabled ? 'text-success' : 'text-warning')}>
+                <span
+                  className={cn(
+                    'text-xs font-mono',
+                    rateLimit.global_enabled ? 'text-success' : 'text-warning',
+                  )}
+                >
                   {rateLimit.global_enabled ? 'Enabled' : 'Disabled'}
                 </span>
               </div>
               {Object.entries(rateLimit.active_limits).map(([key, val]) => (
-                <div key={key} className="flex items-center justify-between py-1.5 border-t border-border/20">
+                <div
+                  key={key}
+                  className="flex items-center justify-between py-1.5 border-t border-border/20"
+                >
                   <span className="text-[11px] font-mono text-muted-foreground">{key}</span>
                   <span className="text-[11px] font-mono tabular-nums text-foreground">
                     {val.current}/{val.limit}
@@ -324,17 +411,37 @@ export default function Ops() {
           className="bento-card col-span-12 lg:col-span-6 p-5 space-y-4"
         >
           <div className="flex items-center gap-2.5">
-            <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.4 }}
+              className="p-2 bg-accent/10 rounded-lg"
+            >
               <Database className="w-4 h-4 text-accent" />
             </motion.div>
             <h3 className="text-sm font-sans text-foreground">Cache</h3>
           </div>
           {cache && (
             <div className="grid grid-cols-2 gap-3">
-              <MetricTile icon={Zap} label="Hit rate" value={cacheHit} accent={cache.hit_rate > 0.3} delay={0.25} />
-              <MetricTile icon={Database} label="Entries" value={formatNumber(cache.total_entries)} delay={0.28} />
+              <MetricTile
+                icon={Zap}
+                label="Hit rate"
+                value={cacheHit}
+                accent={cache.hit_rate > 0.3}
+                delay={0.25}
+              />
+              <MetricTile
+                icon={Database}
+                label="Entries"
+                value={formatNumber(cache.total_entries)}
+                delay={0.28}
+              />
               <MetricTile icon={Activity} label="Evictions" value={cache.evictions} delay={0.31} />
-              <MetricTile icon={HardDrive} label="Memory" value={`${cache.memory_usage_mb.toFixed(1)} MB`} delay={0.34} />
+              <MetricTile
+                icon={HardDrive}
+                label="Memory"
+                value={`${cache.memory_usage_mb.toFixed(1)} MB`}
+                delay={0.34}
+              />
             </div>
           )}
           <ActionCard
@@ -356,17 +463,41 @@ export default function Ops() {
           className="bento-card col-span-12 lg:col-span-6 p-5 space-y-4"
         >
           <div className="flex items-center gap-2.5">
-            <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.4 }}
+              className="p-2 bg-accent/10 rounded-lg"
+            >
               <MemoryStick className="w-4 h-4 text-accent" />
             </motion.div>
             <h3 className="text-sm font-sans text-foreground">Memory</h3>
           </div>
           {memory && (
             <div className="grid grid-cols-2 gap-3">
-              <MetricTile icon={Cpu} label="RSS" value={`${memory.rss_mb.toFixed(1)} MB`} delay={0.3} />
-              <MetricTile icon={HardDrive} label="Heap" value={`${memory.heap_mb.toFixed(1)} MB`} delay={0.33} />
-              <MetricTile icon={Activity} label="GC collections" value={memory.gc_collections} delay={0.36} />
-              <MetricTile icon={Zap} label="Optimization" value={memory.optimization_available ? 'Available' : 'N/A'} delay={0.39} />
+              <MetricTile
+                icon={Cpu}
+                label="RSS"
+                value={`${memory.rss_mb.toFixed(1)} MB`}
+                delay={0.3}
+              />
+              <MetricTile
+                icon={HardDrive}
+                label="Heap"
+                value={`${memory.heap_mb.toFixed(1)} MB`}
+                delay={0.33}
+              />
+              <MetricTile
+                icon={Activity}
+                label="GC collections"
+                value={memory.gc_collections}
+                delay={0.36}
+              />
+              <MetricTile
+                icon={Zap}
+                label="Optimization"
+                value={memory.optimization_available ? 'Available' : 'N/A'}
+                delay={0.39}
+              />
             </div>
           )}
           <ActionCard
@@ -388,7 +519,11 @@ export default function Ops() {
           className="bento-card col-span-12 lg:col-span-7 p-5 space-y-4"
         >
           <div className="flex items-center gap-2.5">
-            <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.4 }}
+              className="p-2 bg-accent/10 rounded-lg"
+            >
               <Users className="w-4 h-4 text-accent" />
             </motion.div>
             <h3 className="text-sm font-sans text-foreground">Sessions</h3>
@@ -403,8 +538,12 @@ export default function Ops() {
               <table className="w-full text-left">
                 <thead>
                   <tr className="border-b border-border/30">
-                    <th className="pb-2 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">User</th>
-                    <th className="pb-2 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">Created</th>
+                    <th className="pb-2 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+                      User
+                    </th>
+                    <th className="pb-2 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+                      Created
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -438,7 +577,11 @@ export default function Ops() {
           className="bento-card col-span-12 lg:col-span-5 p-5 space-y-4"
         >
           <div className="flex items-center gap-2.5">
-            <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.4 }} className="p-2 bg-accent/10 rounded-lg">
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.4 }}
+              className="p-2 bg-accent/10 rounded-lg"
+            >
               <Cpu className="w-4 h-4 text-accent" />
             </motion.div>
             <h3 className="text-sm font-sans text-foreground">Tier Config</h3>
@@ -454,10 +597,16 @@ export default function Ops() {
                   className="p-3 rounded-lg bg-muted/20 border border-border/20"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className={cn(
-                      'text-xs font-mono uppercase tracking-wider',
-                      name === 'enterprise' ? 'text-accent' : name === 'pro' ? 'text-info' : 'text-muted-foreground'
-                    )}>
+                    <span
+                      className={cn(
+                        'text-xs font-mono uppercase tracking-wider',
+                        name === 'enterprise'
+                          ? 'text-accent'
+                          : name === 'pro'
+                            ? 'text-info'
+                            : 'text-muted-foreground',
+                      )}
+                    >
                       {name}
                     </span>
                     <span className="text-xs font-mono tabular-nums text-foreground">
@@ -466,7 +615,10 @@ export default function Ops() {
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {cfg.features.map((f) => (
-                      <span key={f} className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted/40 text-muted-foreground">
+                      <span
+                        key={f}
+                        className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted/40 text-muted-foreground"
+                      >
                         {f}
                       </span>
                     ))}
@@ -478,5 +630,5 @@ export default function Ops() {
         </motion.div>
       </div>
     </motion.div>
-  )
+  );
 }
