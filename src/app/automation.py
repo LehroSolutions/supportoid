@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import uuid
 from dataclasses import dataclass
 from hashlib import sha256
@@ -51,6 +52,12 @@ from src.app.dto import (
 )
 from src.app.service import SupportOIDService
 from src.app.timeutils import utc_now_iso
+
+logger = logging.getLogger("supportoid.automation")
+
+# Returned to callers in place of a raw exception, which can carry internal paths,
+# SQL, or library internals. The exception itself is logged with request_id instead.
+INTERNAL_ERROR_DETAIL = "An unexpected error occurred."
 
 
 class AutomationProblem(Exception):
@@ -642,7 +649,10 @@ class AutomationService:
         except AutomationProblem:
             raise
         except Exception as exc:  # pragma: no cover - safety net
-            raise AutomationProblem(500, "Operation failed", str(exc)) from exc
+            logger.exception(
+                "Agent operation %s failed [request_id=%s]", operation_id, request_id
+            )
+            raise AutomationProblem(500, "Operation failed", INTERNAL_ERROR_DETAIL) from exc
 
         envelope = self._envelope(
             ok=True,
@@ -851,13 +861,23 @@ class AutomationService:
             )
             return envelope
         except Exception as exc:  # pragma: no cover - safety net
+            logger.exception(
+                "Approved operation %s failed [request_id=%s]",
+                approval["operation_id"],
+                request_id,
+            )
             job = self.store.update_job(
                 job_id=job_id,
                 status="failed",
-                error_payload={"title": "Execution failed", "detail": str(exc)},
+                error_payload={
+                    "title": "Execution failed",
+                    "detail": INTERNAL_ERROR_DETAIL,
+                },
             )
             if job is None:
-                raise AutomationProblem(500, "Execution failed", str(exc)) from exc
+                raise AutomationProblem(
+                    500, "Execution failed", INTERNAL_ERROR_DETAIL
+                ) from exc
             envelope = self._envelope(
                 ok=False,
                 status="failed",
@@ -865,7 +885,7 @@ class AutomationService:
                 request_id=request_id,
                 approval_id=approval_id,
                 job_id=job_id,
-                error=_problem(500, "Execution failed", str(exc), request_id),
+                error=_problem(500, "Execution failed", INTERNAL_ERROR_DETAIL, request_id),
                 next_action=f"poll:{job_id}",
             )
             self._audit(

@@ -9,6 +9,7 @@ import time
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
@@ -21,11 +22,45 @@ from src.api.routes import legacy_router, router as api_router
 from src.app.automation import AutomationService
 from src.app.automation_store import AutomationStore
 from src.app.auth import AuthService
+from src.app.log_sanitize import sanitize_log_value
 from src.app.service import SupportOIDService
 from src.config.settings import Settings
 from src.interface.web_routes import router as web_router, FRONTEND_DIST
 
 logger = logging.getLogger("supportoid")
+
+# Cookie-authenticated routes outside /api/ that mutate state. The React SPA only ever
+# calls /api/v1/* (frontend/src/lib/api.ts), so these serve the server-rendered Jinja
+# fallback forms, which a browser cannot attach X-CSRF-Token to. They are therefore
+# guarded by a same-origin check rather than the token comparison used for /api/*.
+CSRF_WEB_ROUTES = frozenset({"/chat", "/login", "/logout"})
+
+
+def _csrf_rejected() -> JSONResponse:
+    return JSONResponse(
+        status_code=403,
+        content={
+            "type": "https://supportoid.dev/errors/csrf",
+            "title": "CSRF validation failed",
+            "status": 403,
+            "detail": "Missing or invalid CSRF token",
+        },
+    )
+
+
+def _csrf_origin_allowed(request: Request, csrf_cookie: str) -> bool:
+    """Validate a CSRF attempt that may arrive from a header-less HTML form."""
+    header_token = request.headers.get("X-CSRF-Token")
+    if header_token:
+        return bool(csrf_cookie) and hmac.compare_digest(header_token, csrf_cookie)
+    source = request.headers.get("Origin") or request.headers.get("Referer")
+    if not source:
+        # No browser navigation context (CLI, service-to-service call): a cross-site
+        # form POST always carries Origin, so there is no forged request to stop.
+        return True
+    # Host-only comparison: behind a TLS-terminating proxy request.url.scheme is http
+    # while Origin is https, and a scheme mismatch must not reject the real user.
+    return urlsplit(source).netloc.lower() == request.url.netloc.lower()
 
 
 @asynccontextmanager
@@ -91,22 +126,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         request.state.csrf_token = csrf_cookie
 
         if request.method in ("POST", "PUT", "PATCH", "DELETE"):
-            if request.url.path.startswith("/api/"):
-                has_origin = bool(
-                    request.headers.get("Origin") or request.headers.get("Referer")
-                )
+            path = request.url.path
+            has_origin = bool(
+                request.headers.get("Origin") or request.headers.get("Referer")
+            )
+            if path.startswith("/api/"):
                 if has_origin and csrf_cookie:
                     header_token = request.headers.get("X-CSRF-Token")
                     if not header_token or not hmac.compare_digest(header_token, csrf_cookie):
-                        return JSONResponse(
-                            status_code=403,
-                            content={
-                                "type": "https://supportoid.dev/errors/csrf",
-                                "title": "CSRF validation failed",
-                                "status": 403,
-                                "detail": "Missing or invalid CSRF token",
-                            },
-                        )
+                        return _csrf_rejected()
+            elif path in CSRF_WEB_ROUTES:
+                if csrf_cookie and not _csrf_origin_allowed(request, csrf_cookie):
+                    return _csrf_rejected()
 
         response = await call_next(request)
         response.set_cookie(
@@ -122,7 +153,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.middleware("http")
     async def request_id_middleware(request: Request, call_next):
-        request_id = request.headers.get("X-Request-ID", str(uuid.uuid4()))
+        raw_request_id = request.headers.get("X-Request-ID", str(uuid.uuid4()))
+        # Sanitised before it is stored or echoed, so a hostile value cannot forge log
+        # lines or split the X-Request-ID response header.
+        request_id = sanitize_log_value(raw_request_id, max_length=128)
         request.state.request_id = request_id
         start = time.monotonic()
         response = await call_next(request)

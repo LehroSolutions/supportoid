@@ -14,7 +14,7 @@ services:
       SUPPORTOID_COST_DIR: /app/data/runtime/costs
       SUPPORTOID_TRACE_DIR: /app/data/runtime/traces
       SUPPORTOID_CONVEX_ADAPTER_URL: http://convex-adapter:4010
-      SUPPORTOID_CONVEX_API_KEY: ${SUPPORTOID_CONVEX_API_KEY:-}
+      SUPPORTOID_CONVEX_API_KEY: ${SUPPORTOID_CONVEX_API_KEY:?Set a random adapter key of at least 32 characters}
       SUPPORTOID_ALLOW_LEGACY_ANON: "false"
       SUPPORTOID_DEPLOYMENT_PROFILE: docker
     ports:
@@ -26,14 +26,16 @@ services:
 
   convex-adapter:
     build:
-      context: ./convex-adapter
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: convex-adapter/Dockerfile
     container_name: supportoid-convex-adapter
     environment:
       ADAPTER_PORT: 4010
-      ADAPTER_API_KEY: ${SUPPORTOID_CONVEX_API_KEY:-}
+      ADAPTER_HOST: 0.0.0.0
+      NODE_ENV: production
+      ADAPTER_API_KEY: ${SUPPORTOID_CONVEX_API_KEY:?Set a random adapter key of at least 32 characters}
       ADAPTER_DATA_FILE: /app/data/adapter-data.json
-    ports:
-      - "4010:4010"
+    expose:
+      - "4010"
     volumes:
       - ./data/adapter:/app/data

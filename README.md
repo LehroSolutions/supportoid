@@ -1,5 +1,7 @@
 # SupportOID
 
+Production verification and recovery instructions are in [PRODUCTION.md](PRODUCTION.md). Password or role changes revoke existing sessions. Disabled accounts cannot log in or reuse a session. Tests isolate omitted runtime paths under `.pytest-fixtures/`; they must never use a developer's live SQLite database.
+
 SupportOID is a self-hosted customer support application with:
 
 - A FastAPI backend for chat, traces, analytics, health, and admin workflows
@@ -25,24 +27,25 @@ This repository is prepared for an Apache 2.0 open-source release. It ships sour
 ### 1. Install dependencies
 
 ```powershell
-python -m pip install -r requirements.txt
+python -m venv .venv
+$env:Path = (Join-Path (Get-Location) '.venv\Scripts') + ';' + $env:Path
 python -m pip install -r requirements-dev.txt
+bun install --frozen-lockfile
+bun run build:js
 ```
 
-Optional frontend and adapter dependencies:
-
-```powershell
-cd frontend
-bun install
-cd ..\convex-adapter
-bun install
-cd ..
-```
+Install JavaScript workspaces from the root so the frontend and adapter share
+the root lockfile. The PATH setting selects the prepared virtual environment
+for the remaining Python commands in this PowerShell session.
 
 ### 2. Create the first admin
 
+Bootstrap-first auth ships **no default credentials** — you choose the password. Replace the
+placeholder below with your own strong, unique secret (12+ characters); there is intentionally no
+copy-pasteable default.
+
 ```powershell
-python -m src.cli bootstrap-admin --username admin --password "change-this-password"
+python -m src.cli bootstrap-admin --username admin --password "<your-strong-password>"
 ```
 
 ### 3. Optional: load the sanitized demo KB
@@ -95,6 +98,10 @@ bun start
 
 ## Documentation
 
+Canonical docs hub: [`docs/.docs/index.md`](docs/.docs/index.md)
+
+Topic guides:
+
 - [docs/getting-started.md](docs/getting-started.md)
 - [docs/configuration.md](docs/configuration.md)
 - [docs/architecture.md](docs/architecture.md)
@@ -111,19 +118,15 @@ bun start
 ```powershell
 python -m src.cli status
 python -m src.cli traces
-python -m src.cli sync --limit 100
+python -m src.cli --limit 100 sync
 python -m pytest -q
 cd frontend; bun run build
-cd ..\convex-adapter; bun run build
+cd ../convex-adapter; bun run build
 ```
 
 ## License
 
 Copyright © 2026 Lehro Solutions. Licensed under the [Apache License 2.0](LICENSE). See [NOTICE](NOTICE).
-
-## Documentation
-
-Canonical docs hub: [`docs/.docs/index.md`](docs/.docs/index.md)
 
 ## Package managers
 
@@ -147,18 +150,25 @@ See [SECURITY.md](SECURITY.md).
 
 <!-- docs-system:start -->
 
-## Documentation
+### Generated documentation counterparts
 
 The current public documentation is available in [`docs/index.html`](docs/index.html). Start with [`docs/current/start-here.md`](docs/current/start-here.md) for scope, current changes, workflows, architecture, security, quality, and contribution guidance.
 
-### Latest public changes
+Documentation is maintained as canonical Markdown plus generated HTML and JSON counterparts. Run
+`bun run docs:check` before a public release: it verifies that every `docs/current/*.md` has `.html`
+and `.json` counterparts and that each JSON `sourceChecksum` matches its Markdown.
+
+`bun run docs:build` is **not** a generator in this repository. It exits non-zero and prints how to
+proceed rather than reporting a false success (see `scripts/docs.mjs`). Regenerate the HTML/JSON
+counterparts and refresh the checksums with the upstream docs packaging pipeline, then re-run
+`bun run docs:check`.
+
+#### Latest public changes
 
 - Operations and analytics dashboards
 - Knowledge-quality surfaces
 - Trace search and expansion
 - Open-source release hardening
-
-Documentation is maintained as canonical Markdown plus generated HTML and JSON counterparts. Run `pnpm docs:build` after changing `docs/current/*.md` and `pnpm docs:check` before a public release.
 <!-- docs-system:end -->
 
 <!-- bun-toolchain:start -->
@@ -170,10 +180,14 @@ This repository uses **Bun 1.3.14** and targets **Node 24+** for JavaScript tool
 ```bash
 rm -f package-lock.json
 bun install
-bun run build
-bun run test
+bun run build:js
+python -m pytest -q
 bun run docs:check
 ```
+
+There is no root `build` or `test` script: use `build:js` (or `build:web` / `build:adapter`) to build
+JavaScript, and `python -m pytest -q` to run the backend suite. `bun run verify` runs both plus
+dependency-resolution checks, formatting, and lint. Run `bun run docs:check` separately.
 
 Do not use `npm ci`; Bun is the canonical install path. Run `bun install` after dependency changes and commit the resulting `bun.lock`.
 <!-- bun-toolchain:end -->

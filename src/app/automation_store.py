@@ -178,6 +178,9 @@ class AutomationStore:
     def upsert_user(self, username: str, password_hash: str, role: str) -> Dict[str, Any]:
         now = time.time()
         with self._lock, self._connect() as conn:
+            previous = conn.execute(
+                "SELECT password_hash, role FROM users WHERE username = ?", (username,)
+            ).fetchone()
             conn.execute(
                 """
                 INSERT INTO users(username, password_hash, role, created_at, updated_at, last_login_at, disabled_at)
@@ -191,6 +194,11 @@ class AutomationStore:
                 """,
                 (username, password_hash, role, now, now),
             )
+            if previous and (previous["password_hash"] != password_hash or previous["role"] != role):
+                conn.execute(
+                    "UPDATE sessions SET revoked_at = ?, updated_at = ? WHERE username = ? AND revoked_at IS NULL",
+                    (now, now, username),
+                )
             conn.commit()
         return self.get_user(username) or {}
 

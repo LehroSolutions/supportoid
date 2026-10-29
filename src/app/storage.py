@@ -463,13 +463,13 @@ class SQLiteStore:
                 SELECT turn_id, role, content, metadata, created_at
                 FROM conversation_turns
                 WHERE conversation_id = ?
-                ORDER BY created_at ASC, turn_id ASC
+                ORDER BY created_at DESC, turn_id DESC
                 LIMIT ?
                 """,
                 (conversation_id, limit),
             ).fetchall()
         turns: List[Dict[str, Any]] = []
-        for row in rows:
+        for row in reversed(rows):
             turns.append(
                 {
                     "turn_id": int(row["turn_id"]),

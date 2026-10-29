@@ -178,12 +178,13 @@ class ResponseCache:
         return CacheResult(hit=False, reason="key_not_found", cache_key=key)
 
     def put(self, message: str, response_text: str, intent: str = "",
-            source: str = "", quality_score: float = 1.0, ttl: float = None) -> str:
+            source: str = "", quality_score: float = 1.0, ttl: float = None,
+            *, key_intent: Optional[str] = None) -> str:
         """Add a response to the cache."""
         if not message or not response_text or not message.strip():
             return ""
 
-        key = self._make_key(message, intent)
+        key = self._make_key(message, intent if key_intent is None else key_intent)
 
         if ttl is None:
             ttl = INTENT_TTL_DEFAULTS.get(intent, self.default_ttl)

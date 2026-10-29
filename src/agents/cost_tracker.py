@@ -8,10 +8,27 @@ Tracks:
   • Latency per call
   • Accumulated conversation cost
 """
-import time, json, threading
+import time, json, threading, re
 from pathlib import Path
 from typing import Dict, Optional, List
 from dataclasses import dataclass, field
+
+
+# conversation_id is client-supplied and is used as a filename, so it is restricted to
+# characters that cannot alter the path: no separators, no drive letters, and no ":"
+# (which Windows reads as an NTFS alternate-data-stream separator).
+_CONVERSATION_ID_RE = re.compile(r"[A-Za-z0-9_.-]{1,120}")
+
+
+def validate_conversation_id(conversation_id: str) -> str:
+    """Return a conversation id safe to use as a filename, or raise ValueError."""
+    is_valid = bool(conversation_id) and bool(
+        _CONVERSATION_ID_RE.fullmatch(conversation_id)
+    )
+    # "." and ".." are valid against the character class but name directories.
+    if not is_valid or not any(ch.isalnum() for ch in conversation_id):
+        raise ValueError("Invalid conversation_id")
+    return conversation_id
 
 
 # Published rates per 1M tokens (USD) — approximate as of 2026-04
@@ -128,10 +145,21 @@ class CostTracker:
             "call_count": len(cc.calls),
         }
 
+    def _conversation_path(self, conversation_id: str) -> Path:
+        """Resolve the on-disk file for a conversation, refusing to escape data_dir."""
+        validate_conversation_id(conversation_id)
+        path = self.data_dir / f"{conversation_id}.json"
+        root = self.data_dir.resolve()
+        resolved = path.resolve()
+        if resolved.parent != root:
+            raise ValueError("Invalid conversation_id")
+        return resolved
+
     def save_conversation(self, conversation_id: str):
         cc = self.conversations.get(conversation_id)
         if not cc:
             return
+        path = self._conversation_path(conversation_id)
         with self._lock:
             data = {
                 "conversation_id": cc.conversation_id,
@@ -149,7 +177,7 @@ class CostTracker:
                     for c in cc.calls
                 ],
             }
-            with open(self.data_dir / f"{conversation_id}.json", "w") as f:
+            with open(path, "w") as f:
                 json.dump(data, f, indent=2)
 
     def get_all_stats(self) -> Dict:

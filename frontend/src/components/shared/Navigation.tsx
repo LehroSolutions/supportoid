@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -25,6 +26,20 @@ const adminNavItems = [{ path: '/ops', label: 'Operations', icon: Shield }];
 export default function Navigation() {
   const { user, logout, isAdmin } = useAuth();
   const location = useLocation();
+  const [logoutError, setLogoutError] = useState('');
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    setLogoutError('');
+    try {
+      await logout();
+    } catch {
+      setLogoutError('Could not sign out on the server. Check your connection and retry.');
+    } finally {
+      setLoggingOut(false);
+    }
+  };
 
   if (!user) return null;
 
@@ -71,7 +86,8 @@ export default function Navigation() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={logout}
+                onClick={handleLogout}
+                disabled={loggingOut}
                 className="p-2 hover:bg-muted/50 rounded-lg transition-colors focus-ring"
                 aria-label="Sign out"
               >
@@ -79,8 +95,13 @@ export default function Navigation() {
               </motion.button>
             </div>
           </div>
+          {logoutError && (
+            <p role="alert" className="mb-3 text-sm text-destructive">
+              {logoutError}
+            </p>
+          )}
 
-          <div className="flex flex-wrap gap-1" role="tablist">
+          <div className="flex flex-wrap gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
@@ -89,8 +110,6 @@ export default function Navigation() {
                 <NavLink
                   key={item.path}
                   to={item.path}
-                  role="tab"
-                  aria-selected={isActive}
                   aria-label={item.label}
                   className={({ isActive }) =>
                     cn(

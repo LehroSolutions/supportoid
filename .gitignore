@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *.pyo
 .venv/
+test-results/
 
 # Local secrets / provider project metadata
 .env

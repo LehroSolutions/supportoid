@@ -36,9 +36,10 @@ class IntentClassifier:
         msg = (message or "").strip()
         if not msg:
             return {"intent": "general_question", "confidence": 0.3, "entities": {}, "sentiment": 0.0, "urgency": 0.0, "language": "en"}
-        intent = self.pipeline.predict([msg])[0]
         probas = self.pipeline.predict_proba([msg])[0]
-        conf = float(max(probas))
+        best = int(self.np.argmax(probas))
+        intent = self.pipeline.classes_[best]
+        conf = float(probas[best])
         return {"intent": intent, "confidence": round(conf, 4),
                 "all_intents": dict(zip(self.pipeline.classes_, probas.tolist())),
                 "entities": self._extract(msg), "sentiment": self._sent(msg),

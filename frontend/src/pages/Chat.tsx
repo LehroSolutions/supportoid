@@ -2,27 +2,49 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { api } from '../lib/api';
+import { useAuth } from '../hooks/useAuth';
 import { springConfig, cn, formatDuration } from '../lib/utils';
 import { Bot, User, AlertCircle, ArrowUp, CircleDot } from 'lucide-react';
 import type { ChatResponse } from '../types';
 
 export default function Chat() {
+  const { user } = useAuth();
+  const storageKey = `supportoid.conversation.${user?.username ?? 'anonymous'}`;
   const [message, setMessage] = useState('');
-  const [conversationId, setConversationId] = useState('');
+  const [conversationId, setConversationId] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem(storageKey) ?? '';
+      return /^[\w.-]{1,100}$/.test(saved) ? saved : '';
+    } catch {
+      return '';
+    }
+  });
   const [result, setResult] = useState<ChatResponse | null>(null);
   const [history, setHistory] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const feedbackMutation = useMutation({ mutationFn: api.feedback.submit });
+
+  useEffect(() => {
+    try {
+      if (conversationId) sessionStorage.setItem(storageKey, conversationId);
+      else sessionStorage.removeItem(storageKey);
+    } catch {
+      /* Chat still works when browser storage is unavailable. */
+    }
+  }, [conversationId, storageKey]);
 
   const chatMutation = useMutation({
     mutationFn: api.chat.send,
-    onSuccess: (data) => {
+    onSuccess: (data, submitted) => {
       setResult(data);
+      setConversationId(data.conversation_id);
+      feedbackMutation.reset();
       setHistory((prev) => [
         ...prev,
-        { role: 'user', content: message },
+        { role: 'user', content: submitted.message },
         { role: 'assistant', content: data.response },
       ]);
-      setMessage('');
+      setMessage((current) => (current.trim() === submitted.message ? '' : current));
     },
   });
 
@@ -163,6 +185,41 @@ export default function Chat() {
           )}
         </motion.div>
       )}
+      {result && (
+        <div className="flex items-center gap-3 text-sm">
+          <button
+            type="button"
+            disabled={feedbackMutation.isPending || feedbackMutation.data?.status === 'recorded'}
+            onClick={() =>
+              feedbackMutation.mutate({ conversation_id: result.conversation_id, rating: 5 })
+            }
+            className="focus-ring rounded-lg border border-input px-3 py-2 disabled:opacity-50"
+          >
+            Helpful response
+          </button>
+          <button
+            type="button"
+            disabled={feedbackMutation.isPending || feedbackMutation.data?.status === 'recorded'}
+            onClick={() =>
+              feedbackMutation.mutate({ conversation_id: result.conversation_id, rating: 1 })
+            }
+            className="focus-ring rounded-lg border border-input px-3 py-2 disabled:opacity-50"
+          >
+            Unhelpful response
+          </button>
+          {feedbackMutation.data?.status === 'recorded' && (
+            <span role="status">Feedback recorded</span>
+          )}
+          {(feedbackMutation.isError || feedbackMutation.data?.status === 'rejected') && (
+            <span role="alert">Feedback could not be recorded. Try again.</span>
+          )}
+        </div>
+      )}
+      {chatMutation.isError && (
+        <p role="alert" className="text-sm text-destructive">
+          Your message could not be sent. Check your connection and retry.
+        </p>
+      )}
 
       <div className="relative">
         {conversationId && (
@@ -170,7 +227,13 @@ export default function Chat() {
             <CircleDot className="w-3 h-3 text-accent" />
             <span className="font-mono">{conversationId}</span>
             <button
-              onClick={() => setConversationId('')}
+              onClick={() => {
+                setConversationId('');
+                setHistory([]);
+                setResult(null);
+                feedbackMutation.reset();
+              }}
+              disabled={chatMutation.isPending}
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Clear conversation ID"
             >

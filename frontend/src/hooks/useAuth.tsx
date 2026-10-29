@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 import type { User } from '../types';
-import { api } from '../lib/api';
+import { api, ApiError } from '../lib/api';
 
 interface AuthContextType {
   user: User | null;
@@ -32,17 +32,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return true;
       }
       return false;
-    } catch {
-      return false;
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 401) return false;
+      throw error;
     }
   }, []);
 
   const logout = useCallback(async (): Promise<void> => {
-    try {
-      await api.auth.logout();
-    } catch {
-      // best-effort
-    }
+    await api.auth.logout();
     setUser(null);
   }, []);
 

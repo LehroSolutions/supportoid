@@ -12,9 +12,12 @@ The original Orchestrator is untouched for backward compatibility.
 """
 
 import time, uuid, logging, threading
+import hashlib
+import json
 from typing import Optional
 
 from src.config.settings import Settings
+from src.app.log_sanitize import sanitize_log_value
 from src.app.timeutils import utc_now_iso
 
 logger = logging.getLogger("supportoid.enhanced_orchestrator")
@@ -89,7 +92,9 @@ class EnhancedOrchestrator:
         except Exception as e:
             with self._stats_lock:
                 self.enhanced_stats["errors"] += 1
-            logger.error(f"Processing error for user {user_id}: {e}")
+            logger.error(
+                f"Processing error for user {sanitize_log_value(user_id)}: {e}"
+            )
             return {
                 "conversation_id": conversation_id or f"conv_error_{uuid.uuid4().hex[:8]}",
                 "response": "I'm sorry, something went wrong while processing your request. Please try again.",
@@ -143,10 +148,10 @@ class EnhancedOrchestrator:
         # Use sanitized input if secrets were detected
         effective_message = sec_result.sanitized_input
 
-        # 3. Try response cache (classify first to get intent for cache key)
-        classification = self.original.classifier.classify(effective_message)
-        intent = classification.get("intent", "")
-        cache_result = self.response_cache.get(effective_message, intent)
+        # Scope answers to the caller and thread; a warm lookup must not run inference.
+        scope = hashlib.sha256(json.dumps([user_id, conversation_id], ensure_ascii=True).encode()).hexdigest()
+        cache_message = f"{scope}:{effective_message}"
+        cache_result = self.response_cache.get(cache_message)
         if cache_result.hit:
             with self._stats_lock:
                 self.enhanced_stats["cache_hits"] += 1
@@ -189,11 +194,12 @@ class EnhancedOrchestrator:
 
         # 5. Cache the response
         self.response_cache.put(
-            message=effective_message,
+            message=cache_message,
             response_text=result["response"],
             intent=result.get("intent", ""),
             source=result.get("source", ""),
             quality_score=result.get("quality_score", 0),
+            key_intent="",
         )
 
         # 6. Add security + rate limit info

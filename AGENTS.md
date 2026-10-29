@@ -20,15 +20,17 @@ Root is a Bun workspace (frontend + convex-adapter); Python uses venv/pip.
 | Frontend dev / build | `bun run dev:web` / `bun run build:web` |
 | Frontend format check | `bun run format:check` |
 | Frontend lint | `bun run lint` (ESLint flat config + react-hooks) |
+| Installed workspace dependencies | `bun run verify:deps` |
+| Built browser and adapter journey | `bun run test:browser` |
 | Build everything JS | `bun run build:js` |
-| Backend setup | `python -m venv .venv && .venv/Scripts/pip install -e .` (or repo INSTALL.md) |
+| Backend setup | `python -m venv .venv && .venv/Scripts/pip install -r requirements-dev.txt` (or repo INSTALL.md) |
 | Backend tests | `python -m pytest -q` |
 | **Full verify (run before declaring done)** | `bun run verify` |
 
 ## Verify Contract
 
-`bun run verify` = frontend format:check + eslint + full JS build (`build:js`
-includes frontend `tsc`) + backend pytest. Must pass before you report
+`bun run verify` checks installed dependencies, frontend formatting and lint,
+the full JS build (`build:js` includes frontend `tsc`), and backend pytest. It must pass before you report
 success. If the venv is missing, create it per INSTALL.md — do not skip
 backend tests silently.
 

@@ -12,6 +12,8 @@ from typing import TYPE_CHECKING, Dict, Iterable, Optional
 
 from fastapi import Depends, HTTPException, Request, status
 
+from src.app.log_sanitize import sanitize_log_value
+
 logger = logging.getLogger("supportoid.auth")
 
 if TYPE_CHECKING:
@@ -326,7 +328,9 @@ class AuthService:
             return None
 
         if not self._login_limiter.check(username):
-            logger.warning("Login rate limited for user: %s", username)
+            logger.warning(
+                "Login rate limited for user: %s", sanitize_log_value(username)
+            )
             return None
 
         user = self._lookup_user(username)
@@ -337,7 +341,7 @@ class AuthService:
             role = str(user.get("role", "support") or "support")
 
         valid, needs_rehash = self._verify_password(password, stored_password)
-        if not user or not valid:
+        if not user or user.get('disabled_at') is not None or not valid:
             self._login_limiter.record_failure(username)
             return None
 
@@ -366,7 +370,9 @@ class AuthService:
             )
             self._automation_store.record_user_login(username)
 
-        logger.info("User logged in: %s (role=%s)", username, role)
+        logger.info(
+            "User logged in: %s (role=%s)", sanitize_log_value(username), role
+        )
         return token
 
     def logout(self, token: str) -> None:
@@ -377,7 +383,9 @@ class AuthService:
                 sha256(token.encode("utf-8")).hexdigest()
             )
             if session:
-                logger.info("User logged out: %s", session.get("username"))
+                logger.info(
+                    "User logged out: %s", sanitize_log_value(session.get("username"))
+                )
 
     def get_user(self, token: Optional[str]) -> Optional[UserContext]:
         if not token:
@@ -389,9 +397,13 @@ class AuthService:
             )
             if not session:
                 return None
+            user = self._automation_store.get_user(str(session.get('username', '')))
+            if not user or user.get('disabled_at') is not None:
+                self._automation_store.revoke_session(str(session['session_id']))
+                return None
             return UserContext(
-                username=str(session.get("username", "unknown")),
-                role=str(session.get("role", "support")),
+                username=str(user["username"]),
+                role=str(user["role"]),
             )
         return None
 

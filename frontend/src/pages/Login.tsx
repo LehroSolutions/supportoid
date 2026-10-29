@@ -30,15 +30,18 @@ export default function Login() {
     setIsLoading(true);
     setError('');
 
-    const success = await login(username, password);
-
-    if (!success) {
-      setError('Invalid credentials');
-      setShake(true);
-      setTimeout(() => setShake(false), 500);
+    try {
+      const success = await login(username, password);
+      if (!success) {
+        setError('Invalid credentials');
+        setShake(true);
+        setTimeout(() => setShake(false), 500);
+      }
+    } catch {
+      setError('Sign-in is temporarily unavailable. Check your connection and try again.');
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -89,9 +92,9 @@ export default function Login() {
             className="flex gap-6"
           >
             {[
-              { value: '99.2%', label: 'Accuracy' },
-              { value: '<2s', label: 'Response' },
-              { value: '24/7', label: 'Uptime' },
+              { value: 'Local', label: 'Data storage' },
+              { value: 'Roles', label: 'Access control' },
+              { value: 'SQLite', label: 'Persistence' },
             ].map((stat) => (
               <div key={stat.label} className="space-y-1">
                 <div className="text-heading font-sans text-foreground tabular-nums">
@@ -136,6 +139,7 @@ export default function Login() {
 
             {error && (
               <motion.div
+                role="alert"
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-5 p-3 rounded-lg bg-destructive/10 border border-destructive/20 flex items-center gap-2.5 text-sm text-destructive"

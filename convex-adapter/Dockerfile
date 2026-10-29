@@ -1,27 +1,35 @@
-FROM node:20-alpine AS build
+FROM node:24-alpine AS build
+COPY --from=oven/bun:1.3.14 /usr/local/bin/bun /usr/local/bin/bun
 
 WORKDIR /app
 
-COPY package.json package-lock.json tsconfig.json ./
-RUN npm ci
+COPY package.json bun.lock bunfig.toml ./
+COPY frontend/package.json ./frontend/package.json
+COPY convex-adapter/package.json ./convex-adapter/package.json
+RUN bun install --frozen-lockfile
 
-COPY src ./src
-RUN npm run build
+COPY convex-adapter/src ./convex-adapter/src
+COPY convex-adapter/tsconfig.json ./convex-adapter/tsconfig.json
+RUN bun run build:adapter
 
 
-FROM node:20-alpine AS runtime
+FROM node:24-alpine AS runtime
+COPY --from=oven/bun:1.3.14 /usr/local/bin/bun /usr/local/bin/bun
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+COPY package.json bun.lock bunfig.toml ./
+COPY frontend/package.json ./frontend/package.json
+COPY convex-adapter/package.json ./convex-adapter/package.json
+RUN bun install --frozen-lockfile --production --filter supportoid-convex-adapter
 
-COPY --from=build /app/dist ./dist
+COPY --from=build /app/convex-adapter/dist ./convex-adapter/dist
+RUN mkdir -p /app/data && chown node:node /app/data
 
 USER node
 
 EXPOSE 4010
 
-CMD ["npm", "start"]
+CMD ["node", "convex-adapter/dist/index.js"]

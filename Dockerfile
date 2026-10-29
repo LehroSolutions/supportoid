@@ -1,12 +1,15 @@
 FROM node:24-alpine AS frontend-builder
+COPY --from=oven/bun:1.3.14 /usr/local/bin/bun /usr/local/bin/bun
 
-WORKDIR /frontend
+WORKDIR /build
 
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm install
+COPY package.json bun.lock bunfig.toml ./
+COPY frontend/package.json ./frontend/package.json
+COPY convex-adapter/package.json ./convex-adapter/package.json
+RUN bun install --frozen-lockfile
 
-COPY frontend/ ./
-RUN npm run build
+COPY frontend/ ./frontend/
+RUN bun run build:web
 
 
 FROM python:3.13-slim AS runtime
@@ -19,16 +22,16 @@ WORKDIR /app
 
 RUN addgroup --system supportoid && adduser --system --ingroup supportoid supportoid
 
-COPY requirements.txt /app/requirements.txt
-RUN python -m pip install --upgrade pip && python -m pip install -r /app/requirements.txt
+COPY requirements.txt constraints.txt /app/
+RUN python -m pip install --upgrade pip==26.2.2 && python -m pip install -r /app/requirements.txt
 
 COPY src /app/src
 COPY deploy /app/deploy
 COPY docs /app/docs
-COPY data /app/data
+COPY data/seed /app/data/seed
 COPY README.md LICENSE NOTICE CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md /app/
 COPY docker-compose.yml /app/docker-compose.yml
-COPY --from=frontend-builder /frontend/dist /app/frontend/dist
+COPY --from=frontend-builder /build/frontend/dist /app/frontend/dist
 
 RUN mkdir -p /app/data/runtime && chown -R supportoid:supportoid /app
 
