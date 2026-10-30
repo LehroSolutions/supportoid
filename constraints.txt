@@ -19,7 +19,7 @@ markupsafe==3.0.3
 numpy==2.3.3
 packaging==25.0
 pluggy==1.6.0
-pydantic==2.12.3
+pydantic==2.14.1
 pydantic-core==2.41.4
 pygments==2.20.0
 pytest==9.0.3
